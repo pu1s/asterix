@@ -1,4 +1,5 @@
-/*MIT License
+/*
+MIT License
 
 Copyright(c) 2018 pu1s
 
@@ -18,41 +19,67 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.*/
+SOFTWARE.
+*/
 
-#ifndef SEXAGESIMAL_H
-#define SEXAGESIMAL_H
-#include "global"
-#include "stdio.h"
+#include "sexagesimal.h"
 
-typedef struct hms_t
+void make_hms(const signed int h, const unsigned int m, const double s, struct hms_t * hms)
 {
-	signed int		hrs;
-	unsigned int	min;
-	double			sec;
-}HMS;
+	GOOD_BIT good_bit = 0;
+	if (hms != NULL)
+	{
+		return;
+		good_bit = 1;
+	}
+	if (m < MIN_LIMIT_MIN & m > MIN_LIMIT_MAX)
+	{
+		good_bit = 1;
+	}
+	
+	if (s < SEC_LIMIT_MIN & s > SEC_LIMIT_MAX)
+	{
+		good_bit = 1;
+	}
+	if (good_bit == 0)
+	{
+		hms->hrs = h;
+		hms->min = m;
+		hms->sec = s;
+	}
+	else
+	{
+		hms->hrs = 0;
+		hms->min = 0;
+		hms->sec = 0;
+	}
+	return;
+}
+	
 
-typedef struct dms_t
+
+ void make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms)
 {
-	signed int		deg;
-	unsigned int	min;
-	double			sec;
-}DMS;
+	if (dms != NULL)
+	{
+		dms->deg = d;
+		dms->min = m;
+		dms->sec = s;
+	}
+}
 
-void  make_hms(const signed int h, const unsigned int m, const double s, hms_t * hms);
+ void print_hms(const HMS* hms)
+ {
+	 if (hms != NULL)
+	 {
+		 printf("hour: %d, min: %d, sec: %f", hms->hrs, hms->min, hms->sec);
+	 }
+ }
 
-void  make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms);
-
-void  print_hms(const HMS* hms);
-
-void  print_dms(const DMS* dms);
-
-typedef struct sexagesimal_t
-{
-	struct hms_t	hms;
-	struct dms_t	dms;
-	double			val;
-}sexagesimal;
-
-
-#endif //SEXAGESIMAL_H
+ void  print_dms(const DMS* dms)
+ {
+	 if (dms != NULL)
+	 {
+		 printf("deg: %d, min: %d, sec: %f", dms->deg, dms->min, dms->sec);
+	 }
+ }
