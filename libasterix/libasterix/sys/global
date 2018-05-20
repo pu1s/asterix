@@ -34,9 +34,9 @@ SOFTWARE.
 #define SEC_LIMIT_MIN 0.0
 #define SEC_LIMIT_MAX 60.0
 //
-// Define Good Bit
+// Define Bad Bit
 //
-#define GOOD_BIT char
+#define BAD_BIT char
 //
 
 

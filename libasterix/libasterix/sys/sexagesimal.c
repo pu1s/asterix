@@ -26,7 +26,7 @@ SOFTWARE.
 
 void make_hms(const signed int h, const unsigned int m, const double s, struct hms_t * hms)
 {
-	GOOD_BIT good_bit = 0;
+	BAD_BIT good_bit = 0;
 	if (hms != NULL)
 	{
 		return;
