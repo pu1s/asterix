@@ -14,7 +14,7 @@ int main()
 	_dms.min = 30;
 	make_hms(10, 20, 20.5, &_hms);
 	cout << _hms.hrs << endl;
-	print_hms(&_hms);
+	print_hms(NULL); // TODO: ограничить
 	print_dms(&_dms);
 	cout << "Hello CMake." << endl;
 	return 0;

@@ -2,8 +2,9 @@
 // или включаемые файлы для конкретного проекта.
 
 #pragma once
-#include "sys/sexagesimal_common.h"
-#include "sys/sexagesimal_common.c"
+//#include "sys/sexagesimal_common.h"
+//#include "sys/sexagesimal_common.c"
+#include "sys/sexagesimal.h"
 #include <iostream>
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
