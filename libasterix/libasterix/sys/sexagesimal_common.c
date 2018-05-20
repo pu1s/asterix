@@ -26,22 +26,22 @@ SOFTWARE.
 
 void make_hms(const signed int h, const unsigned int m, const double s, struct hms_t * hms)
 {
-	BAD_BIT good_bit = 0;
+	BAD_BIT bad_bit = 0;
 	if (hms != NULL)
 	{
 		return;
-		good_bit = 1;
+		bad_bit = 1;
 	}
 	if (m < MIN_LIMIT_MIN & m > MIN_LIMIT_MAX)
 	{
-		good_bit = 1;
+		bad_bit = 1;
 	}
 	
 	if (s < SEC_LIMIT_MIN & s > SEC_LIMIT_MAX)
 	{
-		good_bit = 1;
+		bad_bit = 1;
 	}
-	if (good_bit == 0)
+	if (bad_bit == 0)
 	{
 		hms->hrs = h;
 		hms->min = m;

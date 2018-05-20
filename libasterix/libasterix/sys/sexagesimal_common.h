@@ -39,20 +39,19 @@ typedef struct dms_t
 	double			sec;
 }DMS;
 
-void  make_hms(const signed int h, const unsigned int m, const double s, hms_t * hms);
+void make_hms(const signed int h, const unsigned int m, const double s, hms_t * hms);
 
-void  make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms);
+void make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms);
 
-void  print_hms(const HMS* hms);
+void print_hms(const HMS* hms);
 
-void  print_dms(const DMS* dms);
+void print_dms(const DMS* dms);
 
-typedef struct sexagesimal_t
+typedef struct sexagesimal_common_t
 {
 	struct hms_t	hms;
 	struct dms_t	dms;
 	double			val;
-}sexagesimal;
-
+}sexagesimal_common;
 
 #endif //SEXAGESIMAL_H
