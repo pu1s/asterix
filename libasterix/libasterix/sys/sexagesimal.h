@@ -30,5 +30,5 @@ typedef class sexagesimal_t
 {
 	sexagesimal_common* _sg;
 public:
-	sexagesimal_t() noexcept;
+	sexagesimal_t();
 }sexagesimal, *__sg;
