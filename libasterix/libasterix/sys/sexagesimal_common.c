@@ -32,12 +32,12 @@ void make_hms(const signed int h, const unsigned int m, const double s, struct h
 		return;
 		bad_bit = 1;
 	}
-	if (m < MIN_LIMIT_MIN & m > MIN_LIMIT_MAX)
+	if ((m < MIN_LIMIT_MIN) && (m > MIN_LIMIT_MAX))
 	{
 		bad_bit = 1;
 	}
 	
-	if (s < SEC_LIMIT_MIN & s > SEC_LIMIT_MAX)
+	if ((s < SEC_LIMIT_MIN) && (s > SEC_LIMIT_MAX))
 	{
 		bad_bit = 1;
 	}
@@ -66,12 +66,12 @@ void make_hms(const signed int h, const unsigned int m, const double s, struct h
 		 return;
 		 bad_bit = 1;
 	 }
-	 if (m < MIN_LIMIT_MIN & m > MIN_LIMIT_MAX)
+	 if ((m < MIN_LIMIT_MIN) && (m > MIN_LIMIT_MAX))
 	 {
 		 bad_bit = 1;
 	 }
 
-	 if (s < SEC_LIMIT_MIN & s > SEC_LIMIT_MAX)
+	 if ((s < SEC_LIMIT_MIN) && (s > SEC_LIMIT_MAX))
 	 {
 		 bad_bit = 1;
 	 }
