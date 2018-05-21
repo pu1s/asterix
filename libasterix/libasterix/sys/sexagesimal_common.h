@@ -20,8 +20,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 
-#ifndef SEXAGESIMAL_H
-#define SEXAGESIMAL_H
+#ifndef SEXAGESIMAL_COMMON_H
+#define SEXAGESIMAL_COMMON_H
+
 #include "global"
 #include "stdio.h"
 
@@ -47,11 +48,5 @@ void print_hms(const HMS* hms);
 
 void print_dms(const DMS* dms);
 
-typedef struct sexagesimal_common_t
-{
-	struct hms_t	hms;
-	struct dms_t	dms;
-	double			val;
-}sexagesimal_common;
 
 #endif //SEXAGESIMAL_H

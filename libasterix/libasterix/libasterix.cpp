@@ -16,6 +16,7 @@ int main()
 	cout << _hms.hrs << endl;
 	print_hms(NULL); // TODO: ограничить
 	print_dms(&_dms);
+	auto f = new asx_sexagesimal_base_t<double>();
 	cout << "Hello CMake." << endl;
 	return 0;
 }

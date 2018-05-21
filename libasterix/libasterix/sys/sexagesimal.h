@@ -26,9 +26,17 @@ SOFTWARE.
 #include "sexagesimal_common.h"
 #include "sexagesimal_common.c"
 
-typedef class sexagesimal_t
+#include <string>
+
+template<typename _ValueType, typename _TimeTraid = HMS, typename  _AngleTraid = DMS> 
+class asx_sexagesimal_base_t
 {
-	sexagesimal_common* _sg;
+	// Private members
+	_ValueType		_m_Value;
+	_TimeTraid		_m_Time;
+	_AngleTraid		_m_Angle;
+	wchar_t*		_m_str_angle;
+	wchar_t*		_m_str_time;
 public:
-	sexagesimal_t();
-}sexagesimal, *__sg;
+	
+};
