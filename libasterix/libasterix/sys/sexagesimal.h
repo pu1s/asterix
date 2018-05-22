@@ -32,6 +32,7 @@ SOFTWARE.
 template<typename _Value_Traid, typename ... _Content_Traits>
 class asx_basic_three_cont_t 
 {
+	const int variadic_count = sizeof...(_Content_Traits);
 };
 
 template<typename _Value_Type, typename _Content_1_Type, typename _Content_2_Type>
