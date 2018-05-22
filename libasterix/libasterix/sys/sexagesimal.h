@@ -25,18 +25,52 @@ SOFTWARE.
 
 #include "sexagesimal_common.h"
 #include "sexagesimal_common.c"
+#include "basic"
 
 #include <string>
 
-template<typename _ValueType, typename _TimeTraid = HMS, typename  _AngleTraid = DMS> 
-class asx_sexagesimal_base_t
+template<typename _Value_Traid, typename ... _Content_Traits>
+class asx_basic_three_cont_t 
 {
-	// Private members
-	_ValueType		_m_Value;
-	_TimeTraid		_m_Time;
-	_AngleTraid		_m_Angle;
-	wchar_t*		_m_str_angle;
-	wchar_t*		_m_str_time;
-public:
-	
 };
+
+template<typename _Value_Type, typename _Content_1_Type, typename _Content_2_Type>
+class asx_basic_cont_t : asx_basic_three_cont_t<_Value_Type, _Content_1_Type, _Content_2_Type>
+{
+private:
+	_Value_Type			_value;
+	_Content_1_Type		_content_1;
+	_Content_2_Type		_content_2;
+public:
+	_Value_Type asx_get_value(void) noexcept
+	{
+		return _value;
+	}
+	void asx_set_value(const _Value_Type& _val) noexcept
+	{
+		_value = _val;
+	}
+	_Content_1_Type asx_get_content1(void) noexcept
+	{
+		return _content_1;
+	}
+	_Content_2_Type asx_get_content2(void) noexcept
+	{
+		return _content_2;
+	}
+};
+
+template<typename _Symbol>
+class asx_basic_format_t
+{
+};
+
+
+template<typename _Value_Type>
+class asx_basic_sexagesimal_t : public asx_basic_cont_t<_Value_Type, HMS, DMS>
+{
+
+};
+
+using sexagesimal = asx_basic_sexagesimal_t<float>;
+
