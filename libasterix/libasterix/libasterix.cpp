@@ -5,6 +5,7 @@
 
 
 using namespace std;
+using namespace asterix::sys::types;
 
 int main()
 {

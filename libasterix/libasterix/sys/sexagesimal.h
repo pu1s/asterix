@@ -29,6 +29,8 @@ SOFTWARE.
 
 #include <string>
 
+using namespace asterix::sys::types;
+
 template<typename _Value_Traid, typename ... _Content_Traits>
 class asx_basic_three_cont_t 
 {
