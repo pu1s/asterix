@@ -23,104 +23,106 @@ SOFTWARE.
 */
 
 #include "sexagesimal_common.h"
+#define hms_out(x) (print_hms(x))
+#define dms_out(x) (print_dms(x))
 namespace asterix
 {
 	namespace sys
 	{
-		namespace
+
+		namespace types
 		{
-			namespace types
+			void make_hms(const signed int h, const unsigned int m, const double s, struct hms_t * hms)
 			{
-				void make_hms(const signed int h, const unsigned int m, const double s, struct hms_t * hms)
+				BAD_BIT bad_bit = 0;
+				if (hms == nullptr)
 				{
-					BAD_BIT bad_bit = 0;
-					if (hms != NULL)
-					{
-						return;
-						bad_bit = 1;
-					}
-					if ((m < MIN_LIMIT_MIN) && (m > MIN_LIMIT_MAX))
-					{
-						bad_bit = 1;
-					}
-
-					if ((s < SEC_LIMIT_MIN) && (s > SEC_LIMIT_MAX))
-					{
-						bad_bit = 1;
-					}
-					if (bad_bit == 0)
-					{
-						hms->hrs = h;
-						hms->min = m;
-						hms->sec = s;
-					}
-					else
-					{
-						hms->hrs = 0;
-						hms->min = 0;
-						hms->sec = 0;
-					}
 					return;
+					bad_bit = 1;
+				}
+				if ((m < MIN_LIMIT_MIN) && (m > MIN_LIMIT_MAX))
+				{
+					bad_bit = 1;
 				}
 
-
-
-				void make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms)
+				if ((s < SEC_LIMIT_MIN) && (s > SEC_LIMIT_MAX))
 				{
-					BAD_BIT bad_bit = 0;
-					if (dms != NULL)
-					{
-						return;
-						bad_bit = 1;
-					}
-					if ((m < MIN_LIMIT_MIN) && (m > MIN_LIMIT_MAX))
-					{
-						bad_bit = 1;
-					}
+					bad_bit = 1;
+				}
+				if (bad_bit == 0)
+				{
+					hms->hrs = h;
+					hms->min = m;
+					hms->sec = s;
+				}
+				else
+				{
+					hms->hrs = 0;
+					hms->min = 0;
+					hms->sec = 0;
+				}
+				return;
+			}
 
-					if ((s < SEC_LIMIT_MIN) && (s > SEC_LIMIT_MAX))
-					{
-						bad_bit = 1;
-					}
-					if (bad_bit == 0)
-					{
-						dms->deg = d;
-						dms->min = m;
-						dms->sec = s;
-					}
-					else
-					{
-						dms->deg = 0;
-						dms->min = 0;
-						dms->sec = 0;
-					}
+
+
+			void make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms)
+			{
+				BAD_BIT bad_bit = 0;
+				if (dms != NULL)
+				{
 					return;
+					bad_bit = 1;
+				}
+				if ((m < MIN_LIMIT_MIN) && (m > MIN_LIMIT_MAX))
+				{
+					bad_bit = 1;
 				}
 
-				void print_hms(const HMS* hms)
+				if ((s < SEC_LIMIT_MIN) && (s > SEC_LIMIT_MAX))
 				{
-					if (hms != NULL)
-					{
-						printf("hour: %d, min: %d, sec: %f", hms->hrs, hms->min, hms->sec);
-					}
-					else
-					{
-						printf("hms object not found.\r\n");
-					}
+					bad_bit = 1;
 				}
-
-				void  print_dms(const DMS* dms)
+				if (bad_bit == 0)
 				{
-					if (dms != NULL)
-					{
-						printf("deg: %d, min: %d, sec: %f", dms->deg, dms->min, dms->sec);
-					}
-					else
-					{
-						printf("dms object not found.\r\n");
-					}
+					dms->deg = d;
+					dms->min = m;
+					dms->sec = s;
+				}
+				else
+				{
+					dms->deg = 0;
+					dms->min = 0;
+					dms->sec = 0;
+				}
+				return;
+			}
+
+			void print_hms(const HMS* hms)
+			{
+				if (hms != NULL)
+				{
+					printf("hour: %d, min: %d, sec: %f", hms->hrs, hms->min, hms->sec);
+				}
+				else
+				{
+					printf("hms object not found.\r\n");
 				}
 			}
+
+			void  print_dms(const DMS* dms)
+			{
+				if (dms != NULL)
+				{
+					printf("deg: %d, min: %d, sec: %f", dms->deg, dms->min, dms->sec);
+				}
+				else
+				{
+					printf("dms object not found.\r\n");
+				}
+			}
+
 		}
+
 	}
 }

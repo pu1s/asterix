@@ -29,32 +29,30 @@ namespace asterix
 {
 	namespace sys
 	{
-		namespace
+		
+		namespace types
 		{
-			namespace types
+			typedef struct hms_t
 			{
-				typedef struct hms_t
-				{
 					signed int		hrs;
 					unsigned int	min;
 					double			sec;
-				}HMS;
+			}HMS;
 
-				typedef struct dms_t
-				{
+			typedef struct dms_t
+			{
 					signed int		deg;
 					unsigned int	min;
 					double			sec;
-				}DMS;
+			}DMS;
 
-				void make_hms(const signed int h, const unsigned int m, const double s, hms_t * hms);
+			void make_hms(const signed int h, const unsigned int m, const double s, hms_t * hms);
 
-				void make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms);
+			void make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms);
 
-				void print_hms(const HMS* hms);
+			void print_hms(const HMS* hms);
 
-				void print_dms(const DMS* dms);
-			}
+			void print_dms(const DMS* dms);
 		}
 	}
 }
