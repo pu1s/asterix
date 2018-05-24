@@ -29,7 +29,6 @@ namespace asterix
 {
 	namespace sys
 	{
-
 		namespace types
 		{
 			void make_hms(const signed int h, const unsigned int m, const double s, struct hms_t * hms)
