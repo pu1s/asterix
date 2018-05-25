@@ -25,11 +25,7 @@ SOFTWARE.
 #ifndef BASIC_CONTAINER
 #define BASIC_CONTAINER
 
-template<typename _Value_Trait, typename ... _Content_Traits>
-class asx_basic_content_t 
-{
-	const int variadic_count = sizeof...(_Content_Traits);
-};
+
 
 
 #endif //BASIC_CONTAINER

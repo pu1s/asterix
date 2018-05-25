@@ -4,6 +4,7 @@
 #pragma once
 
 #include "sys/sexagesimal.h"
+
 #include <iostream>
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы.

@@ -27,74 +27,119 @@ SOFTWARE.
 #include "sexagesimal_common.c"
 #include "basic"
 
+#ifndef NDEBUG
+#define NDEBUG
+#include<cassert>
+#endif // !NDEBUG
 #include <string>
-#include <map>
+#include <cstdlib>
+#include <cmath>
 
-using namespace asterix::sys::types;
-
-template<typename _Char_Traits>
-class asx_basic_format_t
+namespace asterix
 {
-};
-
-
-
-template<typename _Value_Type, typename _Content_1_Type, typename _Content_2_Type>
-class asx_basic_sexagesimal_content_t : asx_basic_content_t<_Value_Type, _Content_1_Type, _Content_2_Type>
-{
-protected:
-	_Value_Type				_m_value;
-	_Content_1_Type			_m_content_1;
-	_Content_2_Type			_m_content_2;
-
-	inline _Value_Type asx_get_value(void) noexcept
+	namespace sys
 	{
-		return _m_value;
+		namespace types
+		{
+			typedef struct
+			{
+				wchar_t			sign[2];
+				wchar_t			deg_hrs[4];
+				wchar_t			deg_hrs_symbol[10];
+				wchar_t			min[3];
+				wchar_t			min_symbol[10];
+				wchar_t			sec[14];
+				wchar_t			sec_symbol[10];
+				wchar_t			suff[2];
+				bool			space_enabled;
+				unsigned short	sec_precision;
+				bool			null_placeholder;
+			} asx_sexagesimal_format_tag;
+
+
+			typedef struct asx_sexagesimal_data_tag
+			{
+				struct angle_and_time_tag
+				{
+					signed angle;
+					signed time;
+				}deg_hrs;
+				unsigned			min;
+				double				sec;
+			}asx_sexigesimal_data_t;
+
+
+			typedef class sexagesimal_tag
+			{
+				double					_m_value;
+				asx_sexigesimal_data_t  _m_data;
+				bool					_m_is_calculated;
+			public:
+				
+				sexagesimal_tag()
+				{
+					this->_m_value = double();
+					this->_m_data.deg_hrs.angle = signed();
+					this->_m_data.deg_hrs.time = signed();
+					this->_m_data.min = unsigned();
+					this->_m_data.sec = double();
+					this->_m_is_calculated = false;
+				}
+
+				sexagesimal_tag(const double& val) : sexagesimal_tag()
+				{
+					this->_m_value = double(val);
+					this->_m_is_calculated = this->_calculate(_m_value, &_m_data);
+				}
+			private:
+				inline void _double_to_hms_dms(const double& val, asx_sexigesimal_data_t* data)
+				{
+					// TODO: n impl
+				}
+				inline bool _calculate(const double& val, asx_sexigesimal_data_t* data) noexcept
+				{
+					assert(data != nullptr);
+					// TODO: n impl
+					return true;
+				}
+			public:
+				double Value(void) noexcept
+				{
+					return _m_value;
+				}
+				friend std::ostream& operator<<(std::ostream& os, sexagesimal_tag& sg) noexcept
+				{
+					// TODO: n impl
+					return os;
+				}
+				std::string ToString() noexcept
+				{
+					// TODO: n impl
+				}
+				std::string ToString(const asx_sexagesimal_format_tag& frmt) noexcept
+				{
+					// TODO: n impl
+				}
+			}sexagesimal_t;
+
+		}
+		namespace util
+		{
+
+		
+		class asx_sexagesimal_util
+		{
+		public:
+			static void asx_util_set_sexadesimal(const double& val, asterix::sys::types::sexagesimal_t* sg) noexcept
+			{
+				return;
+			}
+		};
+		}
 	}
-	inline void asx_set_value(const _Value_Type& _val) noexcept
-	{
-		_m_value = _val;
-	}
-	inline _Content_1_Type asx_get_content1(void) noexcept
-	{
-		return _m_content_1;
-	}
-	inline _Content_2_Type asx_get_content2(void) noexcept
-	{
-		return _m_content_2;
-	}
-};
+}
 
 
 
 
-template<typename _Value_Type>
-class asx_basic_sexagesimal_t : public asx_basic_sexagesimal_content_t<_Value_Type, HMS, DMS>
-{
-	 bool _m_is_calculated = false;
-public:
-	asx_basic_sexagesimal_t() noexcept 
-	{
-		this->_m_value = _Value_Type();
-		this->_m_content_1 = HMS();
-		this->_m_content_2 = DMS();
-		_m_is_calculated = false;
-	}
-	
-	HMS asx_get_hms() noexcept 
-	{
-		return this->asx_get_content1();
-	}
-	DMS asx_get_dms() noexcept
-	{
-		return this->asx_get_content2();
-	}
-	const bool asx_is_calculated() const noexcept
-	{
-		return _m_is_calculated;
-	}
-};
-
-
-using sexagesimal = asx_basic_sexagesimal_t<float>;
 

@@ -2,28 +2,22 @@
 //
 
 #include "libasterix.h"
-#include <vector>
+#include <cstring>
 
 using namespace std;
 using namespace asterix::sys::types;
-
+using namespace asterix::sys::util;
 int main()
 {
-	hms_t _hms;
-	DMS _dms;
-	sexagesimal ssg;
-	_hms = ssg.asx_get_hms();
-	bool c = ssg.asx_is_calculated();
-	_dms = ssg.asx_get_dms();
-	
-	make_hms(10, 20, 20.5, &_hms);
-	cout << _hms.hrs << endl;
-	print_hms(NULL); // TODO: ограничить
-	dms_out(&_dms);
-	asx_basic_sexagesimal_t<float>* f = new asx_basic_sexagesimal_t<float>();
-	/*float ff = f->asx_get_value();
-	HMS hms = f->asx_get_content1();*/
-	sexagesimal *sg = new sexagesimal();
+	asx_sexigesimal_data_t t;
+	sexagesimal_t ff(12.0);
+	asx_sexagesimal_util::asx_util_set_sexadesimal(10.00, &ff);
+	asx_sexagesimal_format_tag sgft;
+	wcscpy(sgft.deg_hrs, L"020111222");
+	cout << sizeof(asx_sexagesimal_format_tag);
 	cout << "Hello CMake." << endl;
+#ifdef _WIN32
+	system("pause");
+#endif
 	return 0;
 }
