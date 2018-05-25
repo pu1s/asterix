@@ -107,11 +107,6 @@ namespace asterix
 				{
 					return _m_value;
 				}
-				friend std::ostream& operator<<(std::ostream& os, sexagesimal_tag& sg) noexcept
-				{
-					// TODO: n impl
-					return os;
-				}
 				std::string ToString() noexcept
 				{
 					// TODO: n impl
@@ -120,6 +115,12 @@ namespace asterix
 				{
 					// TODO: n impl
 				}
+				friend std::ostream& operator<<(std::ostream& os, sexagesimal_tag& sg) noexcept
+				{
+					// TODO: n impl
+					return os;
+				}
+				
 			}sexagesimal_t;
 
 		}
