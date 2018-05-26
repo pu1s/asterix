@@ -35,12 +35,25 @@ SOFTWARE.
 #include <cstdlib>
 #include <cmath>
 
+#define ASX_GLOBAL_LIMIT_HRS_MIN		-9999
+#define ASX_GLOBAL_LIMIT_HRS_MAX		9999
+#define ASX_GLOBAL_LIMIT_DEG_MIN		-9999
+#define ASX_GLOBAL_LIMIT_DEG_MAX		9999
+#define ASX_GLOBAL_LIMIT_DAD_MIN		-9999
+#define ASX_GLOBAL_LIMIT_RAD_MAX		9999
+
 namespace asterix
 {
 	namespace sys
 	{
 		namespace types
 		{
+
+
+			typedef class global_settings
+			{
+				
+			}asx_gs;
 			typedef struct
 			{
 				wchar_t			sign[2];
@@ -61,11 +74,12 @@ namespace asterix
 			{
 				struct angle_and_time_tag
 				{
-					signed arcangle;		// угол
-					signed arctime;			// время
+					signed arcdeg;			// угол в градусах
+					signed archrs;			// время
 				}deg_hrs;
 				unsigned			arcmin;	// минуты дуги
 				double				arcsec;	// секунды дуги
+				signed arcrad;				// угол в радианах
 			}asx_sexigesimal_data_t;
 
 
@@ -79,8 +93,8 @@ namespace asterix
 				sexagesimal_tag()
 				{
 					this->_m_value = double();
-					this->_m_data.deg_hrs.arcangle = signed();
-					this->_m_data.deg_hrs.arctime = signed();
+					this->_m_data.deg_hrs.arcdeg = signed();
+					this->_m_data.deg_hrs.archrs = signed();
 					this->_m_data.arcmin = unsigned();
 					this->_m_data.arcsec = double();
 					this->_m_is_calculated = false;
@@ -128,8 +142,8 @@ namespace asterix
 					//
 					// вычисляем значение угла и времени
 					//
-					data->deg_hrs.arcangle = (int)(intpart * sgn);
-					data->deg_hrs.arctime = (int)(intpart / 15) * sgn;
+					data->deg_hrs.arcdeg = (int)(intpart * sgn);
+					data->deg_hrs.archrs = (int)(intpart / 15) * sgn;
 					//
 					// вычисляем значение минут
 					//

@@ -25,6 +25,15 @@ SOFTWARE.
 #ifndef GLOBAL
 #define GLOBAL
 
+//
+// Define global constant & function
+//
+#define PI								3.14159265358979323846
+#define TO_RAD(GRAD) ((GRAD*PI)/180)
+#define TO_GRAD(RAD) ((RAD*180)/PI)
+//
+// Exports
+//
 #define ASTERIX_API extern "C"
 //
 // Define strong limitation

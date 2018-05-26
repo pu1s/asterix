@@ -9,6 +9,8 @@ using namespace asterix::sys::types;
 using namespace asterix::sys::util;
 int main()
 {
+	auto rad = TO_RAD(56.5);
+	auto grad = TO_GRAD(0.9);
 	asx_sexigesimal_data_t t;
 	sexagesimal_t ff(-26.25445588);
 	asx_sexagesimal_util::asx_util_set_sexadesimal(10.00, &ff);

@@ -1,0 +1,31 @@
+# Get System Info
+function(get_operation_system)
+message(STATUS "Prepare Operating System...")
+if(WIN32)
+message(STATUS "Welcome to build from Windows...")
+set(${SYSTEM} "Windows")
+else()
+message(STATUS "Welcome to UNIX...")
+set(${SYSTEM} " UNIX")
+endif()
+endfunction()
+#
+#
+# Get config file exsist
+function(get_config_file)
+find_path (config_path ${CONFIG_FILE} ${CONFIG_DIR})
+if(config_path-NOTFOUND)
+message(STATUS "Config directory is not found.")
+else()
+message(STATUS "Config directory is found.")
+message(STATUS ${config_path})
+endif()
+find_file(config_file ${CONFIG_FILE} ${CONFIG_DIR})
+if(config_file-NOTFOUND)
+message(STATUS "Config file not found...")
+else()
+message(STATUS "Config file is found.")
+message(STATUS ${config_file})
+endif()
+
+endfunction()
