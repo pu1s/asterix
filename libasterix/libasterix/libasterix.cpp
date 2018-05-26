@@ -2,13 +2,14 @@
 //
 
 #include "libasterix.h"
-
+//#include "sys/sexagesimal_common.h"
+//#include "sys/sexagesimal_common.c"
 
 using namespace std;
 
 int main()
 {
-	hms_t _hms;
+	/*hms_t _hms;
 	DMS _dms;
 	_dms.deg = 10;
 	_dms.min = 30;
@@ -16,6 +17,7 @@ int main()
 	cout << _hms.hrs << endl;
 	print_hms(NULL); // TODO: ограничить
 	print_dms(&_dms);
+	*/
 	cout << "Hello CMake." << endl;
 	return 0;
 }

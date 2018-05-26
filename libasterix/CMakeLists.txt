@@ -7,3 +7,4 @@ project ("libasterix")
 
 # Включите подпроекты.
 add_subdirectory ("libasterix")
+

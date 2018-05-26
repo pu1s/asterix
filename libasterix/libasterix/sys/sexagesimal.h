@@ -24,11 +24,11 @@ SOFTWARE.
 #pragma once
 
 #include "sexagesimal_common.h"
-#include "sexagesimal_common.c"
+//#include "sexagesimal_common.c"
 
 typedef class sexagesimal_t
 {
 	sexagesimal_common* _sg;
 public:
-	sexagesimal_t() noexcept;
+	sexagesimal_t() {};
 }sexagesimal, *__sg;
