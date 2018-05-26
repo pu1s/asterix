@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "sys/sexagesimal.h"
+//#include "sys/sexagesimal.h"
+#include "sys/sexagesimal"
 
 #include <iostream>
 

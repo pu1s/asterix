@@ -12,8 +12,11 @@ int main()
 	auto rad = TO_RAD(56.5);
 	auto grad = TO_GRAD(0.9);
 	asx_sexigesimal_arcdata_t t;
-	sexagesimal_t ff(-26.25445588);
-	asx_sexagesimal_util::asx_util_set_sexadesimal(10.00, &ff);
+	sexagesimal_t ff;
+	ff.SetRad(0.9987);
+	auto ааа = ff.RadValue();
+	auto aaa1 = ff.GradValue();
+	//asx_sexagesimal_util::asx_util_set_sexadesimal(10.00, &ff);
 	asx_sexagesimal_format_tag sgft;
 	wcscpy(sgft.deg_hrs, L"020111222");
 	cout << sizeof(asx_sexagesimal_format_tag);

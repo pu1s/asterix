@@ -1,4 +1,4 @@
-/*
+Ôªø/*
 MIT License
 
 Copyright (c) 2018 Alexander Gorin pu1s@outlook.com
@@ -43,6 +43,11 @@ SOFTWARE.
 #define ASX_GLOBAL_LIMIT_RAD_MAX		9999
 #define ASX_SEXAGESIMAL_NO_RESULT		0.0
 
+
+#pragma warning (push)
+#pragma warning(disable : 4244)
+
+
 namespace asterix
 {
 	namespace sys
@@ -75,20 +80,20 @@ namespace asterix
 			{
 				struct angle_and_time_tag
 				{
-					signed						arcdeg;				// Û„ÓÎ ‚ „‡‰ÛÒ‡ı (ÁÌ‡ÍÓ‚ÓÂ ˆÂÎÓÂ)
-					signed						archrs;				// Û„ÓÎ ‚Ó ‚ÂÏÂÌÌ˚ı Â‰ËÌËˆ‡ı (ÁÌ‡ÍÓ‚ÓÂ ˆÂÎÓÂ)
+					signed						arcdeg;				// —É–≥–æ–ª –≤ –≥—Ä–∞–¥—É—Å–∞—Ö (–∑–Ω–∞–∫–æ–≤–æ–µ —Ü–µ–ª–æ–µ)
+					signed						archrs;				// —É–≥–æ–ª –≤–æ –≤—Ä–µ–º–µ–Ω–Ω—ã—Ö –µ–¥–∏–Ω–∏—Ü–∞—Ö (–∑–Ω–∞–∫–æ–≤–æ–µ —Ü–µ–ª–æ–µ)
 				}deg_hrs;
-				unsigned						arcmin;				// ÏËÌÛÚ˚ ‰Û„Ë (·ÂÁÁÌ‡ÍÓ‚ÓÂ ˆÂÎÓÂ)
-				double							arcsec;				// ÒÂÍÛÌ‰˚ ‰Û„Ë (‚Â˘ÂÒÚ‚ÂÌÌÓÂ)
-				double							arcrad;				// Û„ÓÎ ‚ ‡‰Ë‡Ì‡ı (‚Â˘ÂÒÚ‚ÂÌÌÓÂ)
-				double							arcgrad;			// Û„ÓÎ ‚ „‡‰ÛÒ‡ı (‚Â˘ÂÒÚ‚ÂÌÌÓÂ)
+				unsigned						arcmin;				// –º–∏–Ω—É—Ç—ã –¥—É–≥–∏ (–±–µ–∑–∑–Ω–∞–∫–æ–≤–æ–µ —Ü–µ–ª–æ–µ)
+				double							arcsec;				// —Å–µ–∫—É–Ω–¥—ã –¥—É–≥–∏ (–≤–µ—â–µ—Å—Ç–≤–µ–Ω–Ω–æ–µ)
+				double							arcrad;				// —É–≥–æ–ª –≤ —Ä–∞–¥–∏–∞–Ω–∞—Ö (–≤–µ—â–µ—Å—Ç–≤–µ–Ω–Ω–æ–µ)
+				double							arcgrad;			// —É–≥–æ–ª –≤ –≥—Ä–∞–¥—É—Å–∞—Ö (–≤–µ—â–µ—Å—Ç–≤–µ–Ω–Ω–æ–µ)
 			}asx_sexigesimal_arcdata_t;
 
 
 			typedef class sexagesimal_tag
 			{
 				asx_sexigesimal_arcdata_t		_m_arcdata;			// 
-				bool							_m_is_calculated;	// ÙÎ‡„, ÔÓÎÌÓÚ˚ ‚˚˜ËÒÎÂÌËˇ ÒÚÛÍÚÛ˚
+				bool							_m_is_calculated;	// —Ñ–ª–∞–≥, –ø–æ–ª–Ω–æ—Ç—ã –≤—ã—á–∏—Å–ª–µ–Ω–∏—è —Å—Ç—Ä—É–∫—Ç—É—Ä—ã
 			public:
 
 				sexagesimal_tag()
@@ -101,128 +106,127 @@ namespace asterix
 					this->_m_arcdata.arcsec			= double();
 					this->_m_is_calculated			= false;
 				}
-
-				/*
-				 ÓÌÒÚÛÍÚÓ Ò ‚˚˜ËÒÎÂÌËÂÏ ÁÌ‡˜ÂÌËˇ ËÁ ‚Â˘ÂÒÚ‚ÂÌÌÓ„Ó ˜ËÒÎ‡
-				*/
-				sexagesimal_tag(
-					const double&& arcgrad							// ÒÒ˚ÎÍ‡ Ì‡ ‚Â˘ÂÒÚ‚ÂÌÌÓÂ ˜ËÒÎÓ
-				) 
-					: sexagesimal_tag()
-				{
-					this->_m_arcdata.arcgrad = arcgrad;
-					
-				}
 			private:
 				/*
-				œÂÂÒ˜ÂÚ ËÁ Ì‡ÚÛ‡Î¸ÌÓ„Ó ˜ËÒÎ‡ ‚ Û„ÎÓ‚˚Â ‚ÂÎË˜ËÌ˚
+				–ü–µ—Ä–µ—Å—á–µ—Ç –∏–∑ –Ω–∞—Ç—É—Ä–∞–ª—å–Ω–æ–≥–æ —á–∏—Å–ª–∞ –≤ —É–≥–ª–æ–≤—ã–µ –≤–µ–ª–∏—á–∏–Ω—ã
 				*/
 				inline void _asx_from_dgrad(
-					const double& arcgrad,							// ÒÒ˚ÎÍ‡ Ì‡ ÁÌ‡˜ÂÌËÂ ‚ „‡‰ÛÒ‡ı ‰Û„Ë
-					asx_sexigesimal_arcdata_t* data					// ÛÍ‡Á‡ÚÂÎ¸ Ì‡ Á‡ÔÓÎÌˇÂÏÛ˛ ÒÚÛÍÚÛÛ ‰‡ÌÌ˚ı
-				)
+					const double& arcgrad,							// —Å—Å—ã–ª–∫–∞ –Ω–∞ –∑–Ω–∞—á–µ–Ω–∏–µ –≤ –≥—Ä–∞–¥—É—Å–∞—Ö –¥—É–≥–∏
+					asx_sexigesimal_arcdata_t* data					// —É–∫–∞–∑–∞—Ç–µ–ª—å –Ω–∞ –∑–∞–ø–æ–ª–Ω—è–µ–º—É—é —Å—Ç—Ä—É–∫—Ç—É—Ä—É –¥–∞–Ω–Ω—ã—Ö
+				) noexcept
 				{
 					//
-					// Ó·˙ˇ‚ÎˇÂÏ ÔÂÂÏÂÌÌ˚Â
+					// –æ–±—ä—è–≤–ª—è–µ–º –ø–µ—Ä–µ–º–µ–Ω–Ω—ã–µ
 					//
-					double	sgn;									//ÁÌ‡Í
-					double	mod;									//ÏÓ‰ÛÎ¸
-					double	intpart;								//ˆÂÎ‡ˇ ˜‡ÒÚ¸ 
-					double	drbpart;								//‰Ó·Ì‡ˇ ˜‡ÒÚ¸
+					double	sgn;									//–∑–Ω–∞–∫
+					double	mod;									//–º–æ–¥—É–ª—å
+					double	intpart;								//—Ü–µ–ª–∞—è —á–∞—Å—Ç—å 
+					double	frcpart;								//–¥—Ä–æ–±–Ω–∞—è —á–∞—Å—Ç—å
 					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡Í
+					// –ø—Ä–∏—Å–≤–∞–∏–≤–∞–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ —ç–ª–µ–º–µ–Ω—Ç—É —Å—Ç—Ä—É–∫—Ç—É—Ä—ã
+					//
+					data->arcgrad = arcgrad;
+					//
+					// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ –≤ —Ä–∞–¥–∏–∞–Ω–∞—Ö
+					//
+					//data->arcrad = TO_RAD(arcgrad);
+					data->arcrad = (arcgrad*PI) / 180;
+					//
+					// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞–∫
 					//
 					sgn = arcgrad > 0 ? 1.0 : -1.0;
 					//
-					// ‚˚˜ËÒÎˇÂÏ ÏÓ‰ÛÎ¸
+					// –≤—ã—á–∏—Å–ª—è–µ–º –º–æ–¥—É–ª—å
 					//
-					mod = abs(arcgrad);
+					mod = abs(data->arcgrad);
 					//
-					// ‡Á‰ÂÎˇÂÏ ˜ËÒÎÓ Ì‡ ˆÂÎÛ˛ Ë ‰Ó·ÌÛ˛ ˜‡ÒÚË
-					drbpart = modf(mod, &intpart);
+					// —Ä–∞–∑–¥–µ–ª—è–µ–º —á–∏—Å–ª–æ –Ω–∞ —Ü–µ–ª—É—é –∏ –¥—Ä–æ–±–Ω—É—é —á–∞—Å—Ç–∏
+					frcpart = modf(mod, &intpart);
 					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡˜ÂÌËÂ Û„Î‡ Ë ‚ÂÏÂÌË
+					// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ —É–≥–ª–∞ –∏ –≤—Ä–µ–º–µ–Ω–∏
 					//
 					data->deg_hrs.arcdeg = (int)(intpart * sgn);
 					data->deg_hrs.archrs = (int)(intpart / 15) * sgn;
 					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡˜ÂÌËÂ ÏËÌÛÚ
+					// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ –º–∏–Ω—É—Ç
 					//
-					data->arcmin = (int)(drbpart * 60);
+					data->arcmin = (int)(frcpart * 60);
 					//
-					// Ó·ÌÓ‚ÎˇÂÏ ÁÌ‡˜ÂÌËÂ ‰Ó·ÌÓÈ ˜‡ÒÚË
+					// –æ–±–Ω–æ–≤–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ –¥—Ä–æ–±–Ω–æ–π —á–∞—Å—Ç–∏
 					//
-					drbpart = (drbpart * 60) - data->arcmin;
+					//frcpart = (frcpart * 60) - data->arcmin;
+					frcpart = (frcpart * 60) - (int)(frcpart * 60); //fixed 26/05/2018
+																	//
+																	// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ —Å–µ–∫—É–Ω–¥
+																	//
+					data->arcsec = frcpart * 60;
 					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡˜ÂÌËÂ ÒÂÍÛÌ‰
-					//
-					data->arcsec = drbpart * 60;
-					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡˜ÂÌËÂ ‚ ‡‰Ë‡Ì‡ı
-					//
-					data->arcrad = TO_RAD(data->arcgrad);
-					//
-					// ÛÒÚ‡Ì‡‚ÎË‚‡ÂÏ ÙÎ‡„ ‚˚˜ËÒÎÂÌËˇ ‚ ËÒÚËÌÛ
+					// —É—Å—Ç–∞–Ω–∞–≤–ª–∏–≤–∞–µ–º —Ñ–ª–∞–≥ –≤—ã—á–∏—Å–ª–µ–Ω–∏—è –≤ –∏—Å—Ç–∏–Ω—É
 					//
 					_m_is_calculated = true;
 				}
 				
 				/*
-				œÂÂÒ˜ÂÚ ËÁ Ì‡ÚÛ‡Î¸ÌÓ„Ó ˜ËÒÎ‡ ‚ Û„ÎÓ‚˚Â ‚ÂÎË˜ËÌ˚
+				–ü–µ—Ä–µ—Å—á–µ—Ç –∏–∑ –Ω–∞—Ç—É—Ä–∞–ª—å–Ω–æ–≥–æ —á–∏—Å–ª–∞ –≤ —É–≥–ª–æ–≤—ã–µ –≤–µ–ª–∏—á–∏–Ω—ã
 				*/
 				inline void _asx_from_drad(
-					const double& arcrad,							// ÒÒ˚ÎÍ‡ Ì‡ ÁÌ‡˜ÂÌËÂ ‚ „‡‰ÛÒ‡ı ‰Û„Ë
-					asx_sexigesimal_arcdata_t* data					// ÛÍ‡Á‡ÚÂÎ¸ Ì‡ Á‡ÔÓÎÌˇÂÏÛ˛ ÒÚÛÍÚÛÛ ‰‡ÌÌ˚ı
-				)
+					const double& arcrad,							// —Å—Å—ã–ª–∫–∞ –Ω–∞ –∑–Ω–∞—á–µ–Ω–∏–µ –≤ —Ä–∞–¥–∏–∞–Ω–∞—Ö –¥—É–≥–∏
+					asx_sexigesimal_arcdata_t* data					// —É–∫–∞–∑–∞—Ç–µ–ª—å –Ω–∞ –∑–∞–ø–æ–ª–Ω—è–µ–º—É—é —Å—Ç—Ä—É–∫—Ç—É—Ä—É –¥–∞–Ω–Ω—ã—Ö
+				) noexcept
 				{
 					//
-					// Ó·˙ˇ‚ÎˇÂÏ ÔÂÂÏÂÌÌ˚Â
+					// –æ–±—ä—è–≤–ª—è–µ–º –ø–µ—Ä–µ–º–µ–Ω–Ω—ã–µ
 					//
-					double	sgn;									//ÁÌ‡Í
-					double	mod;									//ÏÓ‰ÛÎ¸
-					double	intpart;								//ˆÂÎ‡ˇ ˜‡ÒÚ¸ 
-					double	drbpart;								//‰Ó·Ì‡ˇ ˜‡ÒÚ¸
+					double	sgn;									//–∑–Ω–∞–∫
+					double	mod;									//–º–æ–¥—É–ª—å
+					double	intpart;								//—Ü–µ–ª–∞—è —á–∞—Å—Ç—å 
+					double	frcpart;								//–¥—Ä–æ–±–Ω–∞—è —á–∞—Å—Ç—å
 					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡Í
+					// –ø—Ä–∏—Å–≤–∞–∏–≤–∞–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ —ç–ª–µ–º–µ–Ω—Ç—É —Å—Ç—Ä—É–∫—Ç—É—Ä—ã
+					//
+					data->arcrad = arcrad;
+					//
+					// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ –≤ —Ä–∞–¥–∏–∞–Ω–∞—Ö
+					//
+					//data->arcgrad = TO_GRAD(arcrad);
+					//
+					data->arcgrad = ((arcrad * 180) / PI);
+					//
+					// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞–∫
 					//
 					sgn = arcrad > 0 ? 1.0 : -1.0;
 					//
-					// ‚˚˜ËÒÎˇÂÏ ÏÓ‰ÛÎ¸
+					// –≤—ã—á–∏—Å–ª—è–µ–º –º–æ–¥—É–ª—å
 					//
-					mod = abs(arcrad);
+					mod = abs(data->arcgrad);
 					//
-					// ‡Á‰ÂÎˇÂÏ ˜ËÒÎÓ Ì‡ ˆÂÎÛ˛ Ë ‰Ó·ÌÛ˛ ˜‡ÒÚË
-					drbpart = modf(mod, &intpart);
+					// —Ä–∞–∑–¥–µ–ª—è–µ–º —á–∏—Å–ª–æ –Ω–∞ —Ü–µ–ª—É—é –∏ –¥—Ä–æ–±–Ω—É—é —á–∞—Å—Ç–∏
+					frcpart = modf(mod, &intpart);
 					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡˜ÂÌËÂ Û„Î‡ Ë ‚ÂÏÂÌË
+					// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ —É–≥–ª–∞ –∏ –≤—Ä–µ–º–µ–Ω–∏
 					//
 					data->deg_hrs.arcdeg = (int)(intpart * sgn);
 					data->deg_hrs.archrs = (int)(intpart / 15) * sgn;
 					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡˜ÂÌËÂ ÏËÌÛÚ
+					// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ –º–∏–Ω—É—Ç
 					//
-					data->arcmin = (int)(drbpart * 60);
+					data->arcmin = (int)(frcpart * 60);
 					//
-					// Ó·ÌÓ‚ÎˇÂÏ ÁÌ‡˜ÂÌËÂ ‰Ó·ÌÓÈ ˜‡ÒÚË
+					// –æ–±–Ω–æ–≤–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ –¥—Ä–æ–±–Ω–æ–π —á–∞—Å—Ç–∏
 					//
-					drbpart = (drbpart * 60) - data->arcmin;
-					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡˜ÂÌËÂ ÒÂÍÛÌ‰
-					//
-					data->arcsec = drbpart * 60;
-					//
-					// ‚˚˜ËÒÎˇÂÏ ÁÌ‡˜ÂÌËÂ ‚ ‡‰Ë‡Ì‡ı
-					//
-					data->arcrad = TO_GRAD(data->arcrad);
-					//
-					// ÛÒÚ‡Ì‡‚ÎË‚‡ÂÏ ÙÎ‡„ ‚˚˜ËÒÎÂÌËˇ ‚ ËÒÚËÌÛ
+					//frcpart = (frcpart * 60) - data->arcmin;
+					frcpart = (frcpart * 60) - (int)(frcpart * 60); // fixed 26/05/2018
+																	//
+																	// –≤—ã—á–∏—Å–ª—è–µ–º –∑–Ω–∞—á–µ–Ω–∏–µ —Å–µ–∫—É–Ω–¥
+																	//
+					data->arcsec = frcpart * 60;
+					// —É—Å—Ç–∞–Ω–∞–≤–ª–∏–≤–∞–µ–º —Ñ–ª–∞–≥ –≤—ã—á–∏—Å–ª–µ–Ω–∏—è –≤ –∏—Å—Ç–∏–Ω—É
 					//
 					_m_is_calculated = true;
 				}
 
 			public:
-				double GradValue(void) noexcept
-				{
+				double GradValue(void) noexcept {
 					if (_m_arcdata.arcgrad != std::nan("a1"))
 					{
 						return _m_arcdata.arcgrad;
@@ -232,6 +236,7 @@ namespace asterix
 						return ASX_SEXAGESIMAL_NO_RESULT;
 					}
 				}
+
 				double RadValue(void) noexcept
 				{
 					if (_m_arcdata.arcrad != std::nan("a1"))
@@ -243,6 +248,7 @@ namespace asterix
 						return ASX_SEXAGESIMAL_NO_RESULT;
 					}
 				}
+
 				std::string ToString() noexcept
 				{
 					// TODO: n impl
@@ -256,10 +262,22 @@ namespace asterix
 					// TODO: n impl
 					return os;
 				}
+				sexagesimal_tag& SetGrad(const double& arcgrad) noexcept
+				{
+					_asx_from_dgrad(arcgrad, &_m_arcdata);
+					return *this;
+				}
 
+
+				sexagesimal_tag& SetRad(const double& arcrad) noexcept
+				{
+					_asx_from_drad(arcrad, &_m_arcdata);
+					return *this;
+				}
 			}sexagesimal_t;
 
 		}
+
 		namespace util
 		{
 
@@ -275,6 +293,7 @@ namespace asterix
 		}
 	}
 }
+#pragma warning( pop ) 
 
 
 
