@@ -41,6 +41,7 @@ SOFTWARE.
 #define ASX_GLOBAL_LIMIT_DEG_MAX		9999
 #define ASX_GLOBAL_LIMIT_DAD_MIN		-9999
 #define ASX_GLOBAL_LIMIT_RAD_MAX		9999
+#define ASX_SEXAGESIMAL_NO_RESULT		0.0
 
 namespace asterix
 {
@@ -70,72 +71,72 @@ namespace asterix
 			} asx_sexagesimal_format_tag;
 
 
-			typedef struct asx_sexagesimal_data_tag
+			typedef struct sexagesimal_arcdata_tag
 			{
 				struct angle_and_time_tag
 				{
-					signed arcdeg;			// угол в градусах
-					signed archrs;			// время
+					signed						arcdeg;				// угол в градусах (знаковое целое)
+					signed						archrs;				// угол во временных единицах (знаковое целое)
 				}deg_hrs;
-				unsigned			arcmin;	// минуты дуги
-				double				arcsec;	// секунды дуги
-				signed arcrad;				// угол в радианах
-			}asx_sexigesimal_data_t;
+				unsigned						arcmin;				// минуты дуги (беззнаковое целое)
+				double							arcsec;				// секунды дуги (вещественное)
+				double							arcrad;				// угол в радианах (вещественное)
+				double							arcgrad;			// угол в градусах (вещественное)
+			}asx_sexigesimal_arcdata_t;
 
 
 			typedef class sexagesimal_tag
 			{
-				double					_m_value;
-				asx_sexigesimal_data_t  _m_data;
-				bool					_m_is_calculated;
+				asx_sexigesimal_arcdata_t		_m_arcdata;			// 
+				bool							_m_is_calculated;	// флаг, полноты вычисления структуры
 			public:
 
 				sexagesimal_tag()
 				{
-					this->_m_value = double();
-					this->_m_data.deg_hrs.arcdeg = signed();
-					this->_m_data.deg_hrs.archrs = signed();
-					this->_m_data.arcmin = unsigned();
-					this->_m_data.arcsec = double();
-					this->_m_is_calculated = false;
+					this->_m_arcdata.arcgrad		= double();
+					this->_m_arcdata.arcrad			= double();
+					this->_m_arcdata.deg_hrs.arcdeg = signed();
+					this->_m_arcdata.deg_hrs.archrs = signed();
+					this->_m_arcdata.arcmin			= unsigned();
+					this->_m_arcdata.arcsec			= double();
+					this->_m_is_calculated			= false;
 				}
 
 				/*
 				Конструктор с вычислением значения из вещественного числа
 				*/
 				sexagesimal_tag(
-					const double& val			// ссылка на вещественное число
+					const double&& arcgrad							// ссылка на вещественное число
 				) 
 					: sexagesimal_tag()
 				{
-					this->_m_value = double(val);
-					this->_m_is_calculated = this->_calculate(_m_value, &_m_data);
+					this->_m_arcdata.arcgrad = arcgrad;
+					
 				}
 			private:
 				/*
 				Пересчет из натурального числа в угловые величины
 				*/
-				inline void _double_to_hms_dms(
-					const double& val,				// ссылка на значение
-					asx_sexigesimal_data_t* data	// указатель на заполняемую структуру данных
+				inline void _asx_from_dgrad(
+					const double& arcgrad,							// ссылка на значение в градусах дуги
+					asx_sexigesimal_arcdata_t* data					// указатель на заполняемую структуру данных
 				)
-
 				{
 					//
 					// объявляем переменные
 					//
-					double	sgn;			//знак
-					double	mod;			//модуль
-					double	intpart;		//целая часть 
-					double	drbpart;		//дробная часть
+					double	sgn;									//знак
+					double	mod;									//модуль
+					double	intpart;								//целая часть 
+					double	drbpart;								//дробная часть
 					//
 					// вычисляем знак
 					//
-					sgn = val > 0 ? 1.0 : -1.0;
+					sgn = arcgrad > 0 ? 1.0 : -1.0;
 					//
 					// вычисляем модуль
 					//
-					mod = abs(val);
+					mod = abs(arcgrad);
 					//
 					// разделяем число на целую и дробную части
 					drbpart = modf(mod, &intpart);
@@ -156,21 +157,91 @@ namespace asterix
 					// вычисляем значение секунд
 					//
 					data->arcsec = drbpart * 60;
+					//
+					// вычисляем значение в радианах
+					//
+					data->arcrad = TO_RAD(data->arcgrad);
+					//
+					// устанавливаем флаг вычисления в истину
+					//
+					_m_is_calculated = true;
 				}
-				inline bool _calculate(
-					const double& val,				// ссылка на значение
-					asx_sexigesimal_data_t* data	// указатель на заполняемую структуру данных
-				) noexcept
+				
+				/*
+				Пересчет из натурального числа в угловые величины
+				*/
+				inline void _asx_from_drad(
+					const double& arcrad,							// ссылка на значение в градусах дуги
+					asx_sexigesimal_arcdata_t* data					// указатель на заполняемую структуру данных
+				)
 				{
-					assert(data != nullptr);
-					_double_to_hms_dms(val, data);
-					
-					return true;
+					//
+					// объявляем переменные
+					//
+					double	sgn;									//знак
+					double	mod;									//модуль
+					double	intpart;								//целая часть 
+					double	drbpart;								//дробная часть
+																	//
+																	// вычисляем знак
+																	//
+					sgn = arcrad > 0 ? 1.0 : -1.0;
+					//
+					// вычисляем модуль
+					//
+					mod = abs(arcrad);
+					//
+					// разделяем число на целую и дробную части
+					drbpart = modf(mod, &intpart);
+					//
+					// вычисляем значение угла и времени
+					//
+					data->deg_hrs.arcdeg = (int)(intpart * sgn);
+					data->deg_hrs.archrs = (int)(intpart / 15) * sgn;
+					//
+					// вычисляем значение минут
+					//
+					data->arcmin = (int)(drbpart * 60);
+					//
+					// обновляем значение дробной части
+					//
+					drbpart = (drbpart * 60) - data->arcmin;
+					//
+					// вычисляем значение секунд
+					//
+					data->arcsec = drbpart * 60;
+					//
+					// вычисляем значение в радианах
+					//
+					data->arcrad = TO_GRAD(data->arcrad);
+					//
+					// устанавливаем флаг вычисления в истину
+					//
+					_m_is_calculated = true;
 				}
+
 			public:
-				double Value(void) noexcept
+				double GradValue(void) noexcept
 				{
-					return _m_value;
+					if (_m_arcdata.arcgrad != std::nan("a1"))
+					{
+						return _m_arcdata.arcgrad;
+					}
+					else
+					{
+						return ASX_SEXAGESIMAL_NO_RESULT;
+					}
+				}
+				double RadValue(void) noexcept
+				{
+					if (_m_arcdata.arcrad != std::nan("a1"))
+					{
+						return _m_arcdata.arcrad;
+					}
+					else
+					{
+						return ASX_SEXAGESIMAL_NO_RESULT;
+					}
 				}
 				std::string ToString() noexcept
 				{
