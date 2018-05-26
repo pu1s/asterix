@@ -182,9 +182,9 @@ namespace asterix
 					double	mod;									//модуль
 					double	intpart;								//целая часть 
 					double	drbpart;								//дробная часть
-																	//
-																	// вычисляем знак
-																	//
+					//
+					// вычисляем знак
+					//
 					sgn = arcrad > 0 ? 1.0 : -1.0;
 					//
 					// вычисляем модуль
