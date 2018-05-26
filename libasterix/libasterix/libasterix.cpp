@@ -6,19 +6,19 @@
 
 using namespace std;
 using namespace asterix::sys::types;
-using namespace asterix::sys::util;
+//using namespace asterix::sys::util;
 int main()
 {
-	auto rad = TO_RAD(56.5);
-	auto grad = TO_GRAD(0.9);
+	int rad = TO_RAD(56.5);
+	int grad = TO_GRAD(0.9);
 	asx_sexigesimal_arcdata_t t;
-	sexagesimal_t ff;
+	sexagesimal_tag ff;
 	ff.SetRad(0.9987);
-	auto ааа = ff.RadValue();
-	auto aaa1 = ff.GradValue();
+	double ааа = ff.RadValue();
+	double aaa1 = ff.GradValue();
 	//asx_sexagesimal_util::asx_util_set_sexadesimal(10.00, &ff);
 	asx_sexagesimal_format_tag sgft;
-	wcscpy(sgft.deg_hrs, L"020111222");
+	//wcscpy(sgft.deg_hrs, L"020111222");
 	cout << sizeof(asx_sexagesimal_format_tag);
 	cout << "Hello CMake." << endl;
 #ifdef _WIN32
