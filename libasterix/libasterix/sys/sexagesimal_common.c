@@ -22,4 +22,106 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "sexagesimal_common.h"
+#define hms_out(x) (print_hms(x))
+#define dms_out(x) (print_dms(x))
+namespace asterix
+{
+	namespace sys
+	{
+		namespace types
+		{
+			void make_hms(const signed int h, const unsigned int m, const double s, struct hms_t * hms)
+			{
+				BAD_BIT bad_bit = 0;
+				if (hms == nullptr)
+				{
+					return;
+					bad_bit = 1;
+				}
+				if ((m < MIN_LIMIT_MIN) && (m > MIN_LIMIT_MAX))
+				{
+					bad_bit = 1;
+				}
 
+				if ((s < SEC_LIMIT_MIN) && (s > SEC_LIMIT_MAX))
+				{
+					bad_bit = 1;
+				}
+				if (bad_bit == 0)
+				{
+					hms->hrs = h;
+					hms->min = m;
+					hms->sec = s;
+				}
+				else
+				{
+					hms->hrs = 0;
+					hms->min = 0;
+					hms->sec = 0;
+				}
+				return;
+			}
+
+
+
+			void make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms)
+			{
+				BAD_BIT bad_bit = 0;
+				if (dms != NULL)
+				{
+					return;
+					bad_bit = 1;
+				}
+				if ((m < MIN_LIMIT_MIN) && (m > MIN_LIMIT_MAX))
+				{
+					bad_bit = 1;
+				}
+
+				if ((s < SEC_LIMIT_MIN) && (s > SEC_LIMIT_MAX))
+				{
+					bad_bit = 1;
+				}
+				if (bad_bit == 0)
+				{
+					dms->deg = d;
+					dms->min = m;
+					dms->sec = s;
+				}
+				else
+				{
+					dms->deg = 0;
+					dms->min = 0;
+					dms->sec = 0;
+				}
+				return;
+			}
+
+			void print_hms(const HMS* hms)
+			{
+				if (hms != NULL)
+				{
+					printf("hour: %d, min: %d, sec: %f", hms->hrs, hms->min, hms->sec);
+				}
+				else
+				{
+					printf("hms object not found.\r\n");
+				}
+			}
+
+			void  print_dms(const DMS* dms)
+			{
+				if (dms != NULL)
+				{
+					printf("deg: %d, min: %d, sec: %f", dms->deg, dms->min, dms->sec);
+				}
+				else
+				{
+					printf("dms object not found.\r\n");
+				}
+			}
+
+		}
+
+	}
+}

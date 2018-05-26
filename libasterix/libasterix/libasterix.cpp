@@ -2,22 +2,22 @@
 //
 
 #include "libasterix.h"
-//#include "sys/sexagesimal_common.h"
-//#include "sys/sexagesimal_common.c"
+#include <cstring>
 
 using namespace std;
-
+using namespace asterix::sys::types;
+using namespace asterix::sys::util;
 int main()
 {
-	/*hms_t _hms;
-	DMS _dms;
-	_dms.deg = 10;
-	_dms.min = 30;
-	make_hms(10, 20, 20.5, &_hms);
-	cout << _hms.hrs << endl;
-	print_hms(NULL); // TODO: ограничить
-	print_dms(&_dms);
-	*/
+	asx_sexigesimal_data_t t;
+	sexagesimal_t ff(12.0);
+	asx_sexagesimal_util::asx_util_set_sexadesimal(10.00, &ff);
+	asx_sexagesimal_format_tag sgft;
+	wcscpy(sgft.deg_hrs, L"020111222");
+	cout << sizeof(asx_sexagesimal_format_tag);
 	cout << "Hello CMake." << endl;
+#ifdef _WIN32
+	system("pause");
+#endif
 	return 0;
 }

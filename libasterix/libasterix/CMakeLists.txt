@@ -3,8 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-
 # Добавьте источник для исполняемого файла этого проекта.
-add_executable (libasterix "libasterix.cpp" "libasterix.h" "sys/sexagesimal_common.h" "sys/sexagesimal.cpp")
-
+add_executable (libasterix "libasterix.cpp" "libasterix.h" )
+set_property(TARGET libasterix PROPERTY CXX_STANDARD 17)
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
