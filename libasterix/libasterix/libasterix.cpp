@@ -10,7 +10,7 @@ using namespace asterix::sys::util;
 int main()
 {
 	asx_sexigesimal_data_t t;
-	sexagesimal_t ff(12.0);
+	sexagesimal_t ff(-26.25445588);
 	asx_sexagesimal_util::asx_util_set_sexadesimal(10.00, &ff);
 	asx_sexagesimal_format_tag sgft;
 	wcscpy(sgft.deg_hrs, L"020111222");
