@@ -29,8 +29,8 @@ SOFTWARE.
 // Define global constant & function
 //
 #define PI								3.14159265358979323846
-#define TO_RAD(GRAD) ((double)(GRAD*PI)/180)
-#define TO_GRAD(RAD) ((double)(RAD*180)/PI)
+#define TO_RAD(GRAD) ((double)((GRAD)*(PI))/180)
+#define TO_GRAD(RAD) ((double)((RAD)*180)/(PI))
 //
 // Exports
 //

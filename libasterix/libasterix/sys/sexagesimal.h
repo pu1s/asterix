@@ -60,20 +60,7 @@ namespace asterix
 			{
 				
 			}asx_gs;
-			typedef struct
-			{
-				wchar_t			sign[2];
-				wchar_t			deg_hrs[4];
-				wchar_t			deg_hrs_symbol[10];
-				wchar_t			min[3];
-				wchar_t			min_symbol[10];
-				wchar_t			sec[14];
-				wchar_t			sec_symbol[10];
-				wchar_t			suff[2];
-				bool			space_enabled;
-				unsigned short	sec_precision;
-				bool			null_placeholder;
-			} asx_sexagesimal_format_tag;
+			
 
 
 			typedef struct sexagesimal_arcdata_tag
@@ -92,8 +79,16 @@ namespace asterix
 
 			typedef class sexagesimal_tag
 			{
+				typedef
+				enum class arcdata_type_t
+				{
+					grad = 0,
+					rad = 1
+				}asx_arcdata_type_t;
+
 				asx_sexigesimal_arcdata_t		_m_arcdata;			// 
 				bool							_m_is_calculated;	// флаг, полноты вычисления структуры
+				
 			public:
 
 				sexagesimal_tag()
@@ -110,27 +105,41 @@ namespace asterix
 				/*
 				Пересчет из натурального числа в угловые величины
 				*/
-				inline void _asx_from_dgrad(
-					const double& arcgrad,							// ссылка на значение в градусах дуги
-					asx_sexigesimal_arcdata_t* data					// указатель на заполняемую структуру данных
+				inline void _asx_swap_arcdata(
+					const double& _in_val,
+					const asx_arcdata_type_t _in_arcdata_type
 				) noexcept
 				{
+					_m_is_calculated = false;
 					//
 					// объявляем переменные
 					//
+					double arcgrad, arcrad;
 					double	sgn;									//знак
 					double	mod;									//модуль
 					double	intpart;								//целая часть 
 					double	frcpart;								//дробная часть
+
+
 					//
-					// присваиваем значение элементу структуры
+					switch (_in_arcdata_type)
+					{
+					case asx_arcdata_type_t::grad:
+						arcgrad = _in_val;
+						arcrad = TO_RAD(_in_val);
+						break;
+					default:
+						arcgrad = TO_GRAD(_in_val);
+						arcrad = _in_val;
+						break;
+					}
 					//
-					data->arcgrad = arcgrad;
+					_m_arcdata.arcgrad = arcgrad;
+					_m_arcdata.arcrad = arcrad;
 					//
 					// вычисляем значение в радианах
 					//
-					//data->arcrad = TO_RAD(arcgrad);
-					data->arcrad = (arcgrad*PI) / 180;
+					
 					//
 					// вычисляем знак
 					//
@@ -138,92 +147,35 @@ namespace asterix
 					//
 					// вычисляем модуль
 					//
-					mod = abs(data->arcgrad);
+					mod = abs(arcgrad);
 					//
 					// разделяем число на целую и дробную части
 					frcpart = modf(mod, &intpart);
 					//
 					// вычисляем значение угла и времени
 					//
-					data->deg_hrs.arcdeg = (int)(intpart * sgn);
-					data->deg_hrs.archrs = (int)(intpart / 15) * sgn;
+					_m_arcdata.deg_hrs.arcdeg = (int)(intpart * sgn);
+					_m_arcdata.deg_hrs.archrs = (int)(intpart / 15) * sgn;
 					//
 					// вычисляем значение минут
 					//
-					data->arcmin = (int)(frcpart * 60);
+					_m_arcdata.arcmin = (int)(frcpart * 60);
 					//
 					// обновляем значение дробной части
 					//
 					//frcpart = (frcpart * 60) - data->arcmin;
-					frcpart = (frcpart * 60) - (int)(frcpart * 60); //fixed 26/05/2018
-																	//
-																	// вычисляем значение секунд
-																	//
-					data->arcsec = frcpart * 60;
+					frcpart = (frcpart * 60) - (int)(frcpart * 60); /*fixed 27/05/2018*/
+					//
+					// вычисляем значение секунд
+					//
+					_m_arcdata.arcsec = frcpart * 60;
 					//
 					// устанавливаем флаг вычисления в истину
 					//
 					_m_is_calculated = true;
 				}
 				
-				/*
-				Пересчет из натурального числа в угловые величины
-				*/
-				inline void _asx_from_drad(
-					const double& arcrad,							// ссылка на значение в радианах дуги
-					asx_sexigesimal_arcdata_t* data					// указатель на заполняемую структуру данных
-				) noexcept
-				{
-					//
-					// объявляем переменные
-					//
-					double	sgn;									//знак
-					double	mod;									//модуль
-					double	intpart;								//целая часть 
-					double	frcpart;								//дробная часть
-					//
-					// присваиваем значение элементу структуры
-					//
-					data->arcrad = arcrad;
-					//
-					// вычисляем значение в радианах
-					//
-					//data->arcgrad = TO_GRAD(arcrad);
-					//
-					data->arcgrad = ((arcrad * 180) / PI);
-					//
-					// вычисляем знак
-					//
-					sgn = arcrad > 0 ? 1.0 : -1.0;
-					//
-					// вычисляем модуль
-					//
-					mod = abs(data->arcgrad);
-					//
-					// разделяем число на целую и дробную части
-					frcpart = modf(mod, &intpart);
-					//
-					// вычисляем значение угла и времени
-					//
-					data->deg_hrs.arcdeg = (int)(intpart * sgn);
-					data->deg_hrs.archrs = (int)(intpart / 15) * sgn;
-					//
-					// вычисляем значение минут
-					//
-					data->arcmin = (int)(frcpart * 60);
-					//
-					// обновляем значение дробной части
-					//
-					//frcpart = (frcpart * 60) - data->arcmin;
-					frcpart = (frcpart * 60) - (int)(frcpart * 60); // fixed 26/05/2018
-																	//
-																	// вычисляем значение секунд
-																	//
-					data->arcsec = frcpart * 60;
-					// устанавливаем флаг вычисления в истину
-					//
-					_m_is_calculated = true;
-				}
+				
 
 			public:
 				double GradValue(void) noexcept {
@@ -239,40 +191,31 @@ namespace asterix
 
 				double RadValue(void) noexcept
 				{
-					if (_m_arcdata.arcrad != std::nan("a1"))
-					{
-						return _m_arcdata.arcrad;
-					}
-					else
-					{
-						return ASX_SEXAGESIMAL_NO_RESULT;
-					}
+					return ASX_SEXAGESIMAL_NO_RESULT;
 				}
 
 				std::string ToString() noexcept
 				{
 					// TODO: n impl
 				}
-				std::string ToString(const asx_sexagesimal_format_tag& frmt) noexcept
-				{
+				//std::string ToString(const asx_sexagesimal_format_tag& frmt) noexcept
+				//{
 					// TODO: n impl
-				}
-				friend std::ostream& operator<<(std::ostream& os, sexagesimal_tag& sg) noexcept
-				{
+				//}
+				//friend std::ostream& operator<<(std::ostream& os, sexagesimal_tag& sg) noexcept
+				//{
 					// TODO: n impl
-					return os;
-				}
-				sexagesimal_tag& SetGrad(const double& arcgrad) noexcept
+				//	return os;
+				//}
+				void SetGrad(const double& arcgrad) noexcept
 				{
-					_asx_from_dgrad(arcgrad, &_m_arcdata);
-					return *this;
+					_asx_swap_arcdata(arcgrad, asx_arcdata_type_t::grad);
 				}
 
 
-				sexagesimal_tag& SetRad(const double& arcrad) noexcept
+				void SetRad(const double& arcrad) noexcept
 				{
-					_asx_from_drad(arcrad, &_m_arcdata);
-					return *this;
+					_asx_swap_arcdata(arcrad, asx_arcdata_type_t::rad);
 				}
 			}sexagesimal_t;
 
