@@ -21,31 +21,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# CMakeList.txt: файл проекта CMake верхнего уровня; проведите глобальную конфигурацию
-# и включите сюда подпроекты.
-
 #
 cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
 #
 set(PROJECT_NAME "libasterix")
-set(SUB_DIRS "libasterix")
-#
 project (${PROJECT_NAME})
-#
-set(SYSTEM "")
-include("func.cmake")
-get_operation_system()
-message(STATUS ${PROJECT_NAME} " build is begin...")
+set("${PROJECT_NAME}_SOURCE_DIR" "src")
+set("${PROJECT_NAME}_BINARY_DIR" "bin")
+set (CMAKE_INCLUDE_PATH ${${PROJECT_NAME}_SOURCE_DIR})
+set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/${${PROJECT_NAME}_BINARY_DIR})
 
-# Включите подпроекты.
-add_subdirectory (${SUB_DIRS})
-set(CONFIG_DIR "libasterix/config")
-set(CONFIG_FILE "asterix.config")
-#
-get_config_file()
+message(STATUS ${CMAKE_INCLUDE_PATH})
+message(STATUS ${PROJECT_NAME} " Build is begin...")
 
-#message("Find config file...")
-#
-#message("Config file is found.")
+add_library(libasterix STATIC "${CMAKE_INCLUDE_PATH}/libasterix.cpp" "${CMAKE_INCLUDE_PATH}/libasterix.h")
+set_property(TARGET libasterix PROPERTY CXX_STANDARD 17)
+target_include_directories(libasterix PUBLIC ${CMAKE_INCLUDE_PATH})
 
-
+install(TARGETS ${PROJECT_NAME} DESTINATION "../build")
