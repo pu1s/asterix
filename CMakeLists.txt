@@ -32,3 +32,4 @@ include("CMake/func.cmake")
 #file(MAKE_DIRECTORY "/build")
 add_subdirectory("libs/libasterix")
 add_subdirectory("asterix")
+

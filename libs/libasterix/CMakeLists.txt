@@ -42,6 +42,11 @@ target_include_directories(lib_asterix PUBLIC ${CMAKE_INCLUDE_PATH})
 set(LIB_OUT_PAT "/out/libs")
 set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}${LIB_OUT_PAT}")
 message(${CMAKE_INSTALL_PREFIX})
+#add_custom_command(TARGET libasterix POST_BUILD
+#                  COMMAND ${CMAKE_COMMAND} -E copy
+#                      "${CMAKE_CURRENT_BINARY_DIR}" DESTINATION "${CMAKE_SOURCE_DIR}/out/libs"
+#)
 install(TARGETS libasterix DESTINATION ${CMAKE_INSTALL_PREFIX})
-#install(FILES "${CMAKE_INCLUDE_PATH}/libasterix.h" DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(TARGETS lib_asterix DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(FILES "${CMAKE_INCLUDE_PATH}/libasterix.h" DESTINATION ${CMAKE_INSTALL_PREFIX})
 #add_custom_command(TARGET libasterix POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}"/${PROJECT_NAME}/${PROJECT_NAME}.lib" DESTINATION "${CMAKE_SOURCE_DIR}/build" )
