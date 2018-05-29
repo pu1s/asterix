@@ -18,7 +18,9 @@ int main()
 	//asx_sexagesimal_util::asx_util_set_sexadesimal(10.00, &ff);
 	//asx_sexagesimal_format_tag sgft;
 	//wcscpy(sgft.deg_hrs, L"020111222");
-	//cout << sizeof(asx_sexagesimal_format_tag);
+	sexagesimal_format frmt;
+	cout << sizeof(sexagesimal_format) <<endl;
+	//cout << sizeof() <<endl;
 	cout << "Hello CMake." << aaa1 << endl;
 #ifdef _WIN32
 	system("pause");

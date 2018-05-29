@@ -32,6 +32,7 @@ SOFTWARE.
 #include<cassert>
 #endif // !NDEBUG
 #include <string>
+#include <xstring>
 #include <cstdlib>
 #include <cmath>
 
@@ -54,15 +55,46 @@ namespace asterix
 	{
 		namespace types
 		{
-
-
-			typedef class global_settings
+			
+			class sexagesimal_format
 			{
 				
-			}asx_gs;
+				std::string _input_format;
+				std::string _output_format;
+				
+			};
+			//template<typename _Char_Traits>
+			//struct ASX_EXPORT sexagesimal_format_tag
+			//{
+			//	_Char_Traits			psn_symbol[01];			// Символы, обозначающие знак
+			//	_Char_Traits			nsn_symbol[01];			// Символы, обозначающие знак
+			//	_Char_Traits			prf_symbol[10];			// Символы, обозначающие знак
+			//	_Char_Traits			deg_symbol[10];			// Символы, обзначающие градусы
+			//	_Char_Traits			hrs_symbol[10];			// Символы, обзначающие часы
+			//	_Char_Traits			min_symbol[10];			// Символы, обзначающие минуты
+			//	_Char_Traits			sec_symbol[10];			// Символы, обзначающие секунды 
+			//	_Char_Traits			suf_symbol[10];
+			//	bool					space_enabled;
+			//	unsigned short			sec_precision;
+			//	bool					null_placeholder;
+			//};
+
+			//template<typename _Char_Traits>
+			//void ASX_EXPORT __cdecl asx_init_format(
+			//	_Char_Traits * sgn_,
+			//	_Char_Traits * deg_hrs_symbol_,
+			//	_Char_Traits * min_symbol_,
+			//	_Char_Traits * sec_symbol_,
+			//	_Char_Traits * suff_,
+			//	const bool& space_enabled_,
+			//	const unsigned short& sec_precision_,
+			//	const bool& null_placeholder_,
+			//	sexagesimal_format_tag* frmt
+			//) noexcept
+			//{
+
+			//}
 			
-
-
 			typedef struct sexagesimal_arcdata_tag
 			{
 				struct angle_and_time_tag
@@ -77,7 +109,7 @@ namespace asterix
 			}asx_sexigesimal_arcdata_t;
 
 
-			typedef class sexagesimal_tag
+			typedef class ASX_EXPORT sexagesimal_tag
 			{
 				typedef
 				enum class arcdata_type_t
@@ -196,6 +228,7 @@ namespace asterix
 
 				std::string ToString() noexcept
 				{
+					return "";
 					// TODO: n impl
 				}
 				//std::string ToString(const asx_sexagesimal_format_tag& frmt) noexcept
@@ -219,6 +252,8 @@ namespace asterix
 				}
 			}sexagesimal_t;
 
+
+			
 		}
 
 		namespace util

@@ -34,7 +34,31 @@ SOFTWARE.
 //
 // Exports
 //
-#define ASTERIX_API extern "C"
+//
+// Export function
+// 
+// Source: Explicitly exporting shared library functions in Linux
+// https://stackoverflow.com/questions/2164827/explicitly-exporting-shared-library-functions-in-linux/2164962
+//
+#if defined(_MSC_VER)
+//  Microsoft 
+#define ASX_EXPORT __declspec(dllexport)
+#define ASX_IMPORT __declspec(dllimport)
+#elif defined(__GNUC__)
+//  GCC
+	#if (__GNUC__ >= 4)
+		#define ASX_EXPORT __attribute__((visibility("default")))
+		#define ASX_IMPORT
+	#else
+		#define ASX_EXPORT extern "C"
+		#define ASX_IMPORT
+	#endif
+#else
+//  do nothing and hope for the best?
+#define ASX_EXPORT
+#define ASX_IMPORT
+#pragma warning Unknown dynamic link import/export semantics.
+#endif
 //
 // Define strong limitation
 //
