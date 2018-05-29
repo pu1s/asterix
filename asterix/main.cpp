@@ -12,13 +12,13 @@ int main()
 	double grad = TO_GRAD(0.9);
 	asx_sexigesimal_arcdata_t t;
 	sexagesimal_tag* ff = new sexagesimal_tag();
-	ff->SetRad(0.9987);
-	ff->SetGrad(98.6);
-	double aaa1 = ff->GradValue();
+	ff->set_radian(0.9987);
+	ff->set_grad(98.6);
+	double aaa1 = ff->get_grad_value();
 	//asx_sexagesimal_util::asx_util_set_sexadesimal(10.00, &ff);
 	//asx_sexagesimal_format_tag sgft;
 	//wcscpy(sgft.deg_hrs, L"020111222");
-	sexagesimal_format frmt;
+ 	sexagesimal_format frmt;
 	cout << sizeof(sexagesimal_format) <<endl;
 	//cout << sizeof() <<endl;
 	cout << "Hello CMake." << aaa1 << endl;

@@ -55,46 +55,68 @@ namespace asterix
 	{
 		namespace types
 		{
-			
+			/*
+			Формат ввода-вывода шестидесятеричного представления угловых величин
+			*/
 			class sexagesimal_format
 			{
-				
-				std::string _input_format;
-				std::string _output_format;
+				//
+				// Constants
+				// 
+				// symbols of formating sexagesimal output and input
+				//
+				const char*		SYM_POS_SGN					= "+";				// сивлол положительных значений
+				const char*		SYM_NEG_SNG					= "-";				// символ отрицательных значений
+				const char*		SYM_H						= "hHhourshrsHRS";	// символы часов
+				const char*		SYM_D						= "dDdegDEGDegree°";// символы градусов
+				const char*		SYM_M						= "mMminminute′";	// символы минут
+				const char*		SYM_S						= "sSsecsecond″";	// символы секунд
+				const char*		SYM_NORD					= "nNord";			// сивлолы положительных значений (север)
+				const char*		SYM_SOUTH					= "sSouth";         // символы отрицательных значений (юг)
+				const char*		SYM_EAST					= "eEast";			// сивлолы положительных значений (восток)
+				const char*		SYM_WEST					= "wWest";			// сивлолы отрицательных значений (запад)
+				const char*		SYM_DELIM					= " :";				// символы разделителя
+				//
+				// Format flags
+				//
+				const char*		FLAG_UPPER_CASE				= "%u+";			// флаг включения заглавных символов
+				const char*		FLAG_DOWN_CASE				= "%u-";			// флаг выключения заглавных символов
+				const char*		FLAG_SYMBOL					= "%s";				// флаг включения символов (°,′,″)
+				const char*		FLAG_SHORT_NAME				= "%n";				// флаг буквенного обозначения (h(d), m, s)
+				const char*		FLAG_MIDDLE_NAME			= "%nn";			// флаг короткого слова в обозначениях (hrs(deg), min, sec)
+				const char*		FLAG_LONG_NAME				= "%nnn";			// флаг короткого слова в обозначениях (hour(degree), minute, second)
+				const char*		FLAG_FULL_NAME				= "%NNN";			// не документировано
+				const char*		FLAG_POS_SGN_ON				= "%+";				// флаг включения отображения знака положительного значения
+				const char*		FLAG_POS_SGN_OFF			= "%p-";			// флаг выключения отображения знака положительного значения
+				const char*		FLAG_SGN_OFF				= "%s-";			// флаг выключения отображения знака 
+				const char*		FLAF_SEP_PREC				= "%s=";			// флаг длинны отображения десятичной части секунд
+				const char*		FLAG_NULL_PLACEHOLDER_ON	= "%N+";			// флаг включения отображения нулей
+				const char*		FLAG_NULL_PLACEHOLDER_OFF	= "%N+";			// флаг выключения отображения нулей
+				const char*		FLAG_SPACE_DELIM_ON			= "%D+";			// флаг включения отображения знака разделителя
+				const char*		FLAG_SPACE_DELIM_OFF		= "%D+";			// флаг выключения отображения знака разделителя
+
+				//
+				// Переменные
+				//
+				std::string		_m_input_format;								// входной формат
+				std::string		_m_output_format;								// выходной формат
+				std::string		_m_format_mask;									// маска формата
 				
 			};
-			//template<typename _Char_Traits>
-			//struct ASX_EXPORT sexagesimal_format_tag
-			//{
-			//	_Char_Traits			psn_symbol[01];			// Символы, обозначающие знак
-			//	_Char_Traits			nsn_symbol[01];			// Символы, обозначающие знак
-			//	_Char_Traits			prf_symbol[10];			// Символы, обозначающие знак
-			//	_Char_Traits			deg_symbol[10];			// Символы, обзначающие градусы
-			//	_Char_Traits			hrs_symbol[10];			// Символы, обзначающие часы
-			//	_Char_Traits			min_symbol[10];			// Символы, обзначающие минуты
-			//	_Char_Traits			sec_symbol[10];			// Символы, обзначающие секунды 
-			//	_Char_Traits			suf_symbol[10];
-			//	bool					space_enabled;
-			//	unsigned short			sec_precision;
-			//	bool					null_placeholder;
-			//};
-
-			//template<typename _Char_Traits>
-			//void ASX_EXPORT __cdecl asx_init_format(
-			//	_Char_Traits * sgn_,
-			//	_Char_Traits * deg_hrs_symbol_,
-			//	_Char_Traits * min_symbol_,
-			//	_Char_Traits * sec_symbol_,
-			//	_Char_Traits * suff_,
-			//	const bool& space_enabled_,
-			//	const unsigned short& sec_precision_,
-			//	const bool& null_placeholder_,
-			//	sexagesimal_format_tag* frmt
-			//) noexcept
-			//{
-
-			//}
 			
+			/*
+			Перечисление, определяющее тип координаты (высота-широта)
+			*/
+			typedef enum class coordinate_type
+			{
+				unk,			// unknown
+				alt,			// altitude
+				lon				// longitude
+			}asx_coordinate_type, alt_lon_type;
+
+			/*
+			Структура данных угловых величин
+			*/
 			typedef struct sexagesimal_arcdata_tag
 			{
 				struct angle_and_time_tag
@@ -106,10 +128,13 @@ namespace asterix
 				double							arcsec;				// секунды дуги (вещественное)
 				double							arcrad;				// угол в радианах (вещественное)
 				double							arcgrad;			// угол в градусах (вещественное)
+				
 			}asx_sexigesimal_arcdata_t;
 
-
-			typedef class ASX_EXPORT sexagesimal_tag
+			/*
+			Шестидесятеричное представление угловых величин
+			*/
+			typedef  class ASX_EXPORT  sexagesimal_tag
 			{
 				typedef
 				enum class arcdata_type_t
@@ -119,12 +144,18 @@ namespace asterix
 				}asx_arcdata_type_t;
 
 				asx_sexigesimal_arcdata_t		_m_arcdata;			// 
+				asx_coordinate_type				_m_coord_type;		//  указывает на склонение-высоту (alt), широту-восхождение (lon)
 				bool							_m_is_calculated;	// флаг, полноты вычисления структуры
 				
 			public:
-
+				/*
+				Шестидесятеричное представление угловых величин
+				*/
 				sexagesimal_tag()
 				{
+					//
+					// начальная инициализация переменных
+					//
 					this->_m_arcdata.arcgrad		= double();
 					this->_m_arcdata.arcrad			= double();
 					this->_m_arcdata.deg_hrs.arcdeg = signed();
@@ -132,14 +163,16 @@ namespace asterix
 					this->_m_arcdata.arcmin			= unsigned();
 					this->_m_arcdata.arcsec			= double();
 					this->_m_is_calculated			= false;
+					this->_m_coord_type				= alt_lon_type::unk;
 				}
 			private:
 				/*
 				Пересчет из натурального числа в угловые величины
 				*/
-				inline void _asx_swap_arcdata(
-					const double& _in_val,
-					const asx_arcdata_type_t _in_arcdata_type
+				inline void __cdecl _asx_swap_arcdata(
+					const double& _in_val,												// значение в градусах, радианах
+					const asx_arcdata_type_t _in_arcdata_type,							// флаг: градусы | радианы
+					const asx_coordinate_type _in_coordinate_type = alt_lon_type::unk	// флаг: склонение  | прямое восхождение
 				) noexcept
 				{
 					_m_is_calculated = false;
@@ -152,7 +185,20 @@ namespace asterix
 					double	intpart;								//целая часть 
 					double	frcpart;								//дробная часть
 
-
+					//
+					// выстовляем флаги типа координаты
+					switch (_in_coordinate_type)
+					{
+					case asx_coordinate_type::alt:
+						_m_coord_type = asx_coordinate_type::alt;
+						break;
+					case asx_coordinate_type::lon:
+						_m_coord_type = asx_coordinate_type::lon;
+						break;
+					default:
+						_m_coord_type = asx_coordinate_type::unk;
+						break;
+					}
 					//
 					switch (_in_arcdata_type)
 					{
@@ -168,10 +214,7 @@ namespace asterix
 					//
 					_m_arcdata.arcgrad = arcgrad;
 					_m_arcdata.arcrad = arcrad;
-					//
-					// вычисляем значение в радианах
-					//
-					
+										
 					//
 					// вычисляем знак
 					//
@@ -207,48 +250,78 @@ namespace asterix
 					_m_is_calculated = true;
 				}
 				
-				
-
 			public:
-				double GradValue(void) noexcept {
-					if (_m_arcdata.arcgrad != std::nan("a1"))
-					{
-						return _m_arcdata.arcgrad;
-					}
-					else
-					{
-						return ASX_SEXAGESIMAL_NO_RESULT;
-					}
-				}
-
-				double RadValue(void) noexcept
+				/*
+				Возвращает значение угловой величины в градусах дуги (вещественное) 
+				*/
+				double __cdecl get_grad_value(void) const noexcept
 				{
-					return ASX_SEXAGESIMAL_NO_RESULT;
+						return _m_arcdata.arcgrad;
 				}
 
-				std::string ToString() noexcept
+				/*
+				Возвращает значение угловой величины в радианах дуги (вещественное)
+				*/
+				double __cdecl get_radian_value(void) const noexcept
+				{
+					return _m_arcdata.arcrad;
+				}
+				double __cdecl get_value(const asx_arcdata_type_t arcdata_type) const noexcept
+				{
+					switch (arcdata_type)
+					{
+					case asx_arcdata_type_t::grad:
+						return _m_arcdata.arcgrad;
+						break;
+					default:
+						return _m_arcdata.arcrad;
+						break;
+					}
+				}
+
+				/*
+				Возвращает значение угловой величины (строка)
+				*/
+				std::string to_string() noexcept
 				{
 					return "";
 					// TODO: n impl
 				}
-				//std::string ToString(const asx_sexagesimal_format_tag& frmt) noexcept
-				//{
-					// TODO: n impl
-				//}
+				
 				//friend std::ostream& operator<<(std::ostream& os, sexagesimal_tag& sg) noexcept
 				//{
 					// TODO: n impl
 				//	return os;
 				//}
-				void SetGrad(const double& arcgrad) noexcept
+
+				/*
+				Присваивает значение выраженное в градусах дуги (вещественное)
+				*/
+				void set_grad(
+					const double& arcgrad,											// градусы дуги (вещественное)
+					const asx_coordinate_type coord_type = asx_coordinate_type::unk	// тип координаты
+				) noexcept
 				{
-					_asx_swap_arcdata(arcgrad, asx_arcdata_type_t::grad);
+					_asx_swap_arcdata(arcgrad, asx_arcdata_type_t::grad, coord_type);
 				}
 
-
-				void SetRad(const double& arcrad) noexcept
+				/*
+				Присваивает значение выраженное в радианах дуги (вещественное)
+				*/
+				void __cdecl set_radian(
+					const double& arcrad,											// радианы (вещественное)
+					const asx_coordinate_type coord_type = asx_coordinate_type::unk	// тип координаты
+				) noexcept
 				{
-					_asx_swap_arcdata(arcrad, asx_arcdata_type_t::rad);
+					_asx_swap_arcdata(arcrad, asx_arcdata_type_t::rad, coord_type);
+				}
+
+				/*
+				Возвращает ссылку на тип координаты
+				*/
+				const asx_coordinate_type& __cdecl get_coordinate_type(void) noexcept
+				{
+					return _m_coord_type;
 				}
 			}sexagesimal_t;
 
@@ -256,19 +329,6 @@ namespace asterix
 			
 		}
 
-		namespace util
-		{
-
-
-			class asx_sexagesimal_util
-			{
-			public:
-				static void asx_util_set_sexadesimal(const double& val, asterix::sys::types::sexagesimal_t* sg) noexcept
-				{
-					return;
-				}
-			};
-		}
 	}
 }
 #pragma warning( pop ) 
