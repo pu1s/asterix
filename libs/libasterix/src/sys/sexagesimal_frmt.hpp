@@ -56,28 +56,40 @@ namespace asterix
 				const char*		SYM_DELIM = " :";					// символы разделителя
 
 				//
-				// Format flags
+				// Format keys
 				//
-				const char*		FLAG_UPPER_CASE = "%u+";			// флаг включения заглавных символов
-				const char*		FLAG_DOWN_CASE = "%u-";				// флаг выключения заглавных символов
-				const char*		FLAG_SYMBOL = "%s";					// флаг включения символов (°,′,″)
-				const char*		FLAG_SHORT_NAME = "%n";				// флаг буквенного обозначения (h(d), m, s)
-				const char*		FLAG_MIDDLE_NAME = "%nn";			// флаг короткого слова в обозначениях (hrs(deg), min, sec)
-				const char*		FLAG_LONG_NAME = "%nnn";			// флаг короткого слова в обозначениях (hour(degree), minute, second)
-				const char*		FLAG_FULL_NAME = "%NNN";			// не документировано
-				const char*		FLAG_POS_SGN_ON = "%+";				// флаг включения отображения знака положительного значения
-				const char*		FLAG_POS_SGN_OFF = "%p-";			// флаг выключения отображения знака положительного значения
-				const char*		FLAG_SGN_OFF = "%s-";				// флаг выключения отображения знака 
-				const char*		FLAF_SEP_PREC = "%s=";				// флаг длинны отображения десятичной части секунд
-				const char*		FLAG_NULL_PLACEHOLDER_ON = "%N+";	// флаг включения отображения нулей
-				const char*		FLAG_NULL_PLACEHOLDER_OFF = "%N+";	// флаг выключения отображения нулей
-				const char*		FLAG_SPACE_DELIM_ON = "%D+";		// флаг включения отображения знака разделителя
-				const char*		FLAG_SPACE_DELIM_OFF = "%D+";		// флаг выключения отображения знака разделителя
+				const char*		KEY_UPPER_CASE = "%u+";				// ключ включения заглавных символов
+				const char*		KEY_DOWN_CASE = "%u-";				// ключ выключения заглавных символов
+				const char*		KEY_SYMBOL = "%s";					// ключ включения символов (°,′,″)
+				const char*		KEY_SHORT_NAME = "%n";				// ключ буквенного обозначения (h(d), m, s)
+				const char*		KEY_MIDDLE_NAME = "%nn";			// ключ короткого слова в обозначениях (hrs(deg), min, sec)
+				const char*		KEY_LONG_NAME = "%nnn";				// ключ длинного слова в обозначениях (hour(degree), minute, second)
+				const char*		KEY_FULL_NAME = "%NNN";				// не документировано
+				const char*		KEY_POS_SGN_ON = "%+";				// ключ включения отображения знака положительного значения
+				const char*		KEY_POS_SGN_OFF = "%p-";			// ключ выключения отображения знака положительного значения
+				const char*		KEY_SGN_OFF = "%s-";				// ключ выключения отображения знака 
+				const char*		KEY_SEP_PREC = "%s=";				// ключ длинны отображения десятичной части секунд
+				const char*		KEY_NULL_PLACEHOLDER_ON = "%N+";	// ключ включения отображения нулей
+				const char*		KEY_NULL_PLACEHOLDER_OFF = "%N+";	// ключ выключения отображения нулей
+				const char*		KEY_SPACE_DELIM_ON = "%D+";			// ключ включения отображения знака разделителя
+				const char*		KEY_SPACE_DELIM_OFF = "%D+";		// ключ выключения отображения знака разделителя
 
+				//
+				// Format tags
+				//
+				bool			TAG_CASE;							// тег включения заглавных символов
+				bool			TAG_SYMBOL;							// тег включения символов (°,′,″)
+				int				TAG_NAME;							// тег буквенного обозначения (h(d), m, s), короткого слова в обозначениях (hrs(deg), min, sec), длинного слова в обозначениях (hour(degree), minute, second)
+				bool			TAG_POS_SGN;						// тег включения отображения знака положительного значения
+				bool			TAG_SGN;							// тег выключения отображения знака 
+				int				TAG_SEP_PREC;						// тег длинны отображения десятичной части секунд
+				bool			TAG_NULL_PLACEHOLDER;				// тег включения отображения нулей
+				bool			TAG_SPACE_DELIM;					// тег включения отображения знака разделителя
+		
 				//
 				// Дефолтная маска
 				//
-				const std::string default_mask; //TODO: n impl
+				const std::string default_mask = "s_S_0000h_00m_00,000000s_S"; // sec prec 6
 				//
 				// Переменные
 				//
