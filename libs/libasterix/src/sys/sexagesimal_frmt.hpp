@@ -94,9 +94,14 @@ namespace asterix
 				//		
 				void __cdecl set_format(const char* mask, const char* flags, ...) noexcept;
 
+				void __cdecl set_format(const std::string& mask, const std::string& flags, ...) noexcept;
+
 				std::string __cdecl parse(const std::string& _in_str_) noexcept;
 				
 				void __cdecl add_custom_mask(const std::string& mask) noexcept;
+
+				void __cdecl reset_format() noexcept;
+
 			};
 		}
 	}
