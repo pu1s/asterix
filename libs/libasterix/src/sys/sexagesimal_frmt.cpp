@@ -37,3 +37,6 @@ void asterix::sys::types::sexagesimal_frmt::add_custom_mask(const std::string & 
 void asterix::sys::types::sexagesimal_frmt::set_format(const std::string & mask, const std::string & flags, ...) noexcept
 {
 }
+void asterix::sys::types::sexagesimal_frmt::reset_format() noexcept
+{
+}
