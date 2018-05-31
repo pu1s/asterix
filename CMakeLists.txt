@@ -28,7 +28,7 @@ cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
 #
 project("asterix_solution")
 set(CMAKE_CXX_STANDARD 17)
-include("CMake/func.cmake")
+include("cmake/func.cmake")
 #file(MAKE_DIRECTORY "/build")
 add_subdirectory("libs/libasterix")
 add_subdirectory("asterix")

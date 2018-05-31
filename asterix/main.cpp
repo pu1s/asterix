@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <string>
 #include "../libs/libasterix/src/libasterix.h"
 #pragma comment(lib, "libasterix.lib") 
 
@@ -19,10 +20,14 @@ int main()
 	//asx_sexagesimal_format_tag sgft;
 	//wcscpy(sgft.deg_hrs, L"020111222");
 	sexagesimal_frmt fffff;
-	cout << fffff.parse("").c_str();
+	fffff.init();
+	fffff.reset_format();
+	auto d = fffff.parse(wstring(L"asssddffffffffff"));
+	//cout << fffff.parse("").c_str();
 	//cout << sizeof() <<endl;
 	//cout << sizeof() <<endl;
 	cout << "Hello CMake." << aaa1 << endl;
+	wcout << d << endl;
 #ifdef _WIN32
 	system("pause");
 #endif
