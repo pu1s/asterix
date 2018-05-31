@@ -41,7 +41,12 @@ add_library(libasterix STATIC
 "${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.hpp")
 set_property(TARGET libasterix PROPERTY CXX_STANDARD 17)
 target_include_directories(libasterix PUBLIC ${CMAKE_INCLUDE_PATH})
-add_library(lib_asterix SHARED "${CMAKE_INCLUDE_PATH}/libasterix.cpp" "${CMAKE_INCLUDE_PATH}/libasterix.h")
+add_library(lib_asterix SHARED 
+"${CMAKE_INCLUDE_PATH}/libasterix.cpp" 
+"${CMAKE_INCLUDE_PATH}/libasterix.h" 
+"${CMAKE_INCLUDE_PATH}/sys/sexagesimal.h"
+"${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.cxx"
+"${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.hpp")
 set_property(TARGET lib_asterix PROPERTY CXX_STANDARD 17)
 target_include_directories(lib_asterix PUBLIC ${CMAKE_INCLUDE_PATH})
 set(LIB_OUT_PAT "/out/libs")

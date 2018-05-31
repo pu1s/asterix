@@ -33,7 +33,6 @@ SOFTWARE.
 #include<cassert>
 #endif // !NDEBUG
 #include <string>
-#include <xstring>
 #include <cstdlib>
 #include <cmath>
 
