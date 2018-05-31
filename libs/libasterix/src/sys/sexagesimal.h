@@ -61,9 +61,9 @@ namespace asterix
 			*/
 			typedef enum class coordinate_type
 			{
-				unk,			// unknown
-				alt,			// altitude
-				lon				// longitude
+				UNKNOWN,			// unknown
+				ALTITUDE,			// altitude
+				LONGITUDE			// longitude
 			}asx_coordinate_type, alt_lon_type;
 
 			/*
@@ -91,8 +91,8 @@ namespace asterix
 				typedef
 				enum class arcdata_type_t
 				{
-					grad = 0,
-					rad = 1
+					GRAD = 0,
+					RAD = 1
 				}asx_arcdata_type_t;
 
 				asx_sexigesimal_arcdata_t		_m_arcdata;			// 
@@ -115,16 +115,16 @@ namespace asterix
 					this->_m_arcdata.arcmin			= unsigned();
 					this->_m_arcdata.arcsec			= double();
 					this->_m_is_calculated			= false;
-					this->_m_coord_type				= alt_lon_type::unk;
+					this->_m_coord_type				= alt_lon_type::UNKNOWN;
 				}
 			private:
 				/*
 				Пересчет из натурального числа в угловые величины
 				*/
 				inline void __cdecl _asx_swap_arcdata(
-					const double& _in_val,												// значение в градусах, радианах
-					const asx_arcdata_type_t _in_arcdata_type,							// флаг: градусы | радианы
-					const asx_coordinate_type _in_coordinate_type = alt_lon_type::unk	// флаг: склонение  | прямое восхождение
+					const double& _in_val,													// значение в градусах, радианах
+					const asx_arcdata_type_t _in_arcdata_type,								// флаг: градусы | радианы
+					const asx_coordinate_type _in_coordinate_type = alt_lon_type::UNKNOWN	// флаг: склонение  | прямое восхождение
 				) noexcept
 				{
 					_m_is_calculated = false;
@@ -141,20 +141,20 @@ namespace asterix
 					// выстовляем флаги типа координаты
 					switch (_in_coordinate_type)
 					{
-					case asx_coordinate_type::alt:
-						_m_coord_type = asx_coordinate_type::alt;
+					case asx_coordinate_type::ALTITUDE:
+						_m_coord_type = asx_coordinate_type::ALTITUDE;
 						break;
-					case asx_coordinate_type::lon:
-						_m_coord_type = asx_coordinate_type::lon;
+					case asx_coordinate_type::LONGITUDE:
+						_m_coord_type = asx_coordinate_type::LONGITUDE;
 						break;
 					default:
-						_m_coord_type = asx_coordinate_type::unk;
+						_m_coord_type = asx_coordinate_type::UNKNOWN;
 						break;
 					}
 					//
 					switch (_in_arcdata_type)
 					{
-					case asx_arcdata_type_t::grad:
+					case asx_arcdata_type_t::GRAD:
 						arcgrad = _in_val;
 						arcrad = TO_RAD(_in_val);
 						break;
@@ -222,7 +222,7 @@ namespace asterix
 				{
 					switch (arcdata_type)
 					{
-					case asx_arcdata_type_t::grad:
+					case asx_arcdata_type_t::GRAD:
 						return _m_arcdata.arcgrad;
 						break;
 					default:
@@ -251,10 +251,10 @@ namespace asterix
 				*/
 				void set_grad(
 					const double& arcgrad,											// градусы дуги (вещественное)
-					const asx_coordinate_type coord_type = asx_coordinate_type::unk	// тип координаты
+					const asx_coordinate_type coord_type = asx_coordinate_type::UNKNOWN	// тип координаты
 				) noexcept
 				{
-					_asx_swap_arcdata(arcgrad, asx_arcdata_type_t::grad, coord_type);
+					_asx_swap_arcdata(arcgrad, asx_arcdata_type_t::GRAD, coord_type);
 				}
 
 				/*
@@ -262,10 +262,10 @@ namespace asterix
 				*/
 				void __cdecl set_radian(
 					const double& arcrad,											// радианы (вещественное)
-					const asx_coordinate_type coord_type = asx_coordinate_type::unk	// тип координаты
+					const asx_coordinate_type coord_type = asx_coordinate_type::UNKNOWN	// тип координаты
 				) noexcept
 				{
-					_asx_swap_arcdata(arcrad, asx_arcdata_type_t::rad, coord_type);
+					_asx_swap_arcdata(arcrad, asx_arcdata_type_t::RAD, coord_type);
 				}
 
 				/*
