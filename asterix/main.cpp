@@ -2,7 +2,13 @@
 #include <cstdlib>
 #include <string>
 #include "../libs/libasterix/src/libasterix.h"
-#pragma comment(lib, "libasterix.lib") 
+#ifdef _WIN32
+#pragma comment(lib, "asterix0.lib") 
+#else
+#pragma comment(lib, "libasterix0.lib") 
+#endif // _WIN32
+
+#pragma comment(lib, "asterix0.lib") 
 
 using namespace std;
 using namespace asterix::sys::types;

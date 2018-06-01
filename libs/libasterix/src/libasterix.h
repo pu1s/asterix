@@ -3,11 +3,8 @@
 
 #pragma once
 
-
-
-//#include "sys/sexagesimal.h"
-#include <sys/sexagesimal>
-#include "sys/sexagesimal_frmt.hpp"
 #include <iostream>
+
+#include "sys/sexagesimal"
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы.

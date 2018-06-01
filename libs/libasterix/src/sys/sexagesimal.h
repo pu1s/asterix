@@ -26,7 +26,7 @@ SOFTWARE.
 #include "sexagesimal_common.h"
 #include "sexagesimal_common.c"
 #include "basic"
-#include "sexagesimal_frmt.hpp"
+//#include "sexagesimal_frmt.hpp"
 
 #ifndef NDEBUG
 #define NDEBUG
@@ -35,6 +35,8 @@ SOFTWARE.
 #include <string>
 #include <cstdlib>
 #include <cmath>
+
+
 
 #define ASX_GLOBAL_LIMIT_HRS_MIN		-9999
 #define ASX_GLOBAL_LIMIT_HRS_MAX		9999
@@ -55,7 +57,6 @@ namespace asterix
 	{
 		namespace types
 		{
-			
 			/*
 			Перечисление, определяющее тип координаты (высота-широта)
 			*/
@@ -121,7 +122,7 @@ namespace asterix
 				/*
 				Пересчет из натурального числа в угловые величины
 				*/
-				inline void __cdecl _asx_swap_arcdata(
+				inline void CDECL _asx_swap_arcdata(
 					const double& _in_val,													// значение в градусах, радианах
 					const asx_arcdata_type_t _in_arcdata_type,								// флаг: градусы | радианы
 					const asx_coordinate_type _in_coordinate_type = alt_lon_type::UNKNOWN	// флаг: склонение  | прямое восхождение
@@ -206,7 +207,7 @@ namespace asterix
 				/*
 				Возвращает значение угловой величины в градусах дуги (вещественное) 
 				*/
-				double __cdecl get_grad_value(void) const noexcept
+				double CDECL get_grad_value(void) const noexcept
 				{
 						return _m_arcdata.arcgrad;
 				}
@@ -214,11 +215,11 @@ namespace asterix
 				/*
 				Возвращает значение угловой величины в радианах дуги (вещественное)
 				*/
-				double __cdecl get_radian_value(void) const noexcept
+				double CDECL get_radian_value(void) const noexcept
 				{
 					return _m_arcdata.arcrad;
 				}
-				double __cdecl get_value(const asx_arcdata_type_t arcdata_type) const noexcept
+				double CDECL get_value(const asx_arcdata_type_t arcdata_type) const noexcept
 				{
 					switch (arcdata_type)
 					{
@@ -234,7 +235,7 @@ namespace asterix
 				/*
 				Возвращает значение угловой величины (строка)
 				*/
-				std::string to_string() noexcept
+				std::string CDECL to_string() noexcept
 				{
 					return "";
 					// TODO: n impl
@@ -249,8 +250,8 @@ namespace asterix
 				/*
 				Присваивает значение выраженное в градусах дуги (вещественное)
 				*/
-				void set_grad(
-					const double& arcgrad,											// градусы дуги (вещественное)
+				void CDECL set_grad(
+					const double& arcgrad,												// градусы дуги (вещественное)
 					const asx_coordinate_type coord_type = asx_coordinate_type::UNKNOWN	// тип координаты
 				) noexcept
 				{
@@ -260,8 +261,8 @@ namespace asterix
 				/*
 				Присваивает значение выраженное в радианах дуги (вещественное)
 				*/
-				void __cdecl set_radian(
-					const double& arcrad,											// радианы (вещественное)
+				void CDECL set_radian(
+					const double& arcrad,												// радианы (вещественное)
 					const asx_coordinate_type coord_type = asx_coordinate_type::UNKNOWN	// тип координаты
 				) noexcept
 				{
@@ -271,16 +272,12 @@ namespace asterix
 				/*
 				Возвращает ссылку на тип координаты
 				*/
-				const asx_coordinate_type& __cdecl get_coordinate_type(void) noexcept
+				const asx_coordinate_type& CDECL get_coordinate_type(void) noexcept
 				{
 					return _m_coord_type;
 				}
 			}sexagesimal_t;
-
-
-			
 		}
-
 	}
 }
 #pragma warning( pop ) 

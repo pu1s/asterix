@@ -60,6 +60,14 @@ SOFTWARE.
 #pragma warning Unknown dynamic link import/export semantics.
 #endif
 //
+// cdecl definition
+//
+#if defined __GNUC__
+#define CDECL __attribute__((__cdecl__))
+#else 
+#define CDECL __cdecl
+#endif
+//
 // Define strong limitation
 //
 #define MIN_LIMIT_MIN 0
@@ -67,9 +75,11 @@ SOFTWARE.
 #define SEC_LIMIT_MIN 0.0
 #define SEC_LIMIT_MAX 60.0
 //
-// Define Bad Bit
+// Define Main Types Open Astronomical Library
 //
-#define BAD_BIT char
+#define ASX_WSTRP	const wchar_t*
+#define ASX_BOOL	bool
+#define ASX_UINT	unsigned int
 //
 
 

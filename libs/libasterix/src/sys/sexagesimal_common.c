@@ -23,8 +23,10 @@ SOFTWARE.
 */
 
 #include "sexagesimal_common.h"
+#define BAD_BIT char
 #define hms_out(x) (print_hms(x))
 #define dms_out(x) (print_dms(x))
+
 namespace asterix
 {
 	namespace sys
