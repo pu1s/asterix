@@ -2,14 +2,14 @@
 #include <cstdlib>
 #include <string>
 #include "../libs/libasterix/src/libasterix.h"
-#include "sys/basic.h"
+#include "../libs/libasterix/src/sys/basic.h"
 #ifdef _WIN32
-#pragma comment(lib, "asterix0.lib") 
+#pragma comment(lib, "libasterix.lib") 
 #else
-#pragma comment(lib, "libasterix0.lib") 
+#pragma comment(lib, "libasterix_st.lib") 
 #endif // _WIN32
 
-#pragma comment(lib, "asterix0.lib") 
+//#pragma comment(lib, "asterix0.lib") 
 
 using namespace std;
 using namespace asterix::sys::types;

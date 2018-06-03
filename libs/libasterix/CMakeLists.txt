@@ -29,28 +29,37 @@ project (${PROJECT_NAME})
 set("${PROJECT_NAME}_SOURCE_DIR" "src")
 set("$CMAKE_BINARY_DIR" "bin")
 set (CMAKE_INCLUDE_PATH ${${PROJECT_NAME}_SOURCE_DIR})
-
+set(TARGET_STATIC_LIB "")
+set(TARGET_SHARED_LIB "")
+if(MSVC)
+	set(TARGET_STATIC_LIB "libasterix")
+	set(TARGET_SHARED_LIB "asterixlib")
+else()
+	set(TARGET_STATIC_LIB "asterix-st")
+	set(TARGET_SHARED_LIB "asterix-sh")
+endif()
 message(STATUS ${CMAKE_INCLUDE_PATH})
 message(STATUS ${PROJECT_NAME} " Build is begin...")
 
-add_library(asterix0 STATIC 
+add_library("${TARGET_STATIC_LIB}" STATIC 
 "${CMAKE_INCLUDE_PATH}/libasterix.cpp" 
 "${CMAKE_INCLUDE_PATH}/libasterix.h" 
 "${CMAKE_INCLUDE_PATH}/sys/sexagesimal"
 "${CMAKE_INCLUDE_PATH}/sys/sexagesimal.h"
 "${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.cxx"
 "${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.hpp")
-set_property(TARGET asterix0 PROPERTY CXX_STANDARD 17)
-target_include_directories(asterix0 PUBLIC ${CMAKE_INCLUDE_PATH})
-add_library(asterix1 SHARED 
+set_property(TARGET ${TARGET_STATIC_LIB} PROPERTY CXX_STANDARD 17)
+target_include_directories(${TARGET_STATIC_LIB} PUBLIC ${CMAKE_INCLUDE_PATH})
+
+add_library("${TARGET_SHARED_LIB}" SHARED 
 "${CMAKE_INCLUDE_PATH}/libasterix.cpp" 
 "${CMAKE_INCLUDE_PATH}/libasterix.h" 
 "${CMAKE_INCLUDE_PATH}/sys/sexagesimal"
 "${CMAKE_INCLUDE_PATH}/sys/sexagesimal.h"
 "${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.cxx"
 "${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.hpp")
-set_property(TARGET asterix1 PROPERTY CXX_STANDARD 17)
-target_include_directories(asterix1 PUBLIC ${CMAKE_INCLUDE_PATH})
+set_property(TARGET "${TARGET_SHARED_LIB}" PROPERTY CXX_STANDARD 17)
+target_include_directories(${TARGET_SHARED_LIB} PUBLIC ${CMAKE_INCLUDE_PATH})
 set(LIB_OUT_PAT "/out/libs")
 set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}${LIB_OUT_PAT}")
 message(${CMAKE_INSTALL_PREFIX})
@@ -58,7 +67,7 @@ message(${CMAKE_INSTALL_PREFIX})
 #                  COMMAND ${CMAKE_COMMAND} -E copy
 #                      "${CMAKE_CURRENT_BINARY_DIR}" DESTINATION "${CMAKE_SOURCE_DIR}/out/libs"
 #)
-install(TARGETS asterix0 DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(TARGETS ${TARGET_STATIC_LIB} DESTINATION ${CMAKE_INSTALL_PREFIX})
 #install(TARGETS lib_asterix DESTINATION ${CMAKE_INSTALL_PREFIX})
 install(FILES "${CMAKE_INCLUDE_PATH}/libasterix.h" DESTINATION ${CMAKE_INSTALL_PREFIX})
 #add_custom_command(TARGET libasterix POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}"/${PROJECT_NAME}/${PROJECT_NAME}.lib" DESTINATION "${CMAKE_SOURCE_DIR}/build" )

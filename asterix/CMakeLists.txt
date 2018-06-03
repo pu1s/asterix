@@ -39,7 +39,7 @@ message(STATUS "Ok! libasreix found...")
 target_include_directories(asterix PUBLIC "${CMAKE_SOURCE_DIR}/bin")
 endif()
 #message("${LIBASTERIX_LIBRARY}")
-target_link_libraries(asterix PUBLIC asterix0)
+target_link_libraries(asterix PUBLIC libasterix)
 
 install(TARGETS asterix DESTINATION ${CMAKE_INSTALL_PREFIX})
 #add_custom_command(TARGET asterix POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}"/${PROJECT_NAME}/${PROJECT_NAME}.exe" DESTINATION "${CMAKE_SOURCE_DIR}/build" )
