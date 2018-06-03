@@ -30,6 +30,7 @@ project("asterix")
 
 add_executable(asterix main.cpp)
 	set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/out")
+	file(MAKE_DIRECTORY  "${CMAKE_INSTALL_PREFIX}")
 	target_include_directories(asterix PUBLIC ${CURRENT_SOURCE_DIR})
 	find_library(LIBASTERIX_LIBRARY libasterix)
 if(LIBASTERIX_LIBRARY-NOTFOUND)
