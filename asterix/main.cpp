@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <string>
 #include "../libs/libasterix/src/libasterix.h"
+#include "sys/basic.h"
 #ifdef _WIN32
 #pragma comment(lib, "asterix0.lib") 
 #else
@@ -15,6 +16,9 @@ using namespace asterix::sys::types;
 //using namespace asterix::sys::util;
 int main()
 {
+	asterix::sys::types::basic_point_2<float> aaa2;
+	asterix::sys::types::basic_point_3<double> aaa3;
+
 	double rad = TO_RAD(56.5);
 	double grad = TO_GRAD(0.9);
 	asx_sexigesimal_arcdata_t t;
