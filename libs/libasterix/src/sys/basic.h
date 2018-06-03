@@ -61,6 +61,10 @@ namespace asterix
 				}
 			};
 			
+			typedef basic_point_2<float>	asx_point2f;
+			typedef basic_point_2<double>	asx_point2d;
+			typedef basic_point_3<float>	asx_point3f;
+			typedef basic_point_3<double>	asx_point3d;
 		}
 	}
 }

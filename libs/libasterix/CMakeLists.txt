@@ -40,24 +40,12 @@ else()
 endif()
 message(STATUS ${CMAKE_INCLUDE_PATH})
 message(STATUS ${PROJECT_NAME} " Build is begin...")
-
-add_library("${TARGET_STATIC_LIB}" STATIC 
-"${CMAKE_INCLUDE_PATH}/libasterix.cpp" 
-"${CMAKE_INCLUDE_PATH}/libasterix.h" 
-"${CMAKE_INCLUDE_PATH}/sys/sexagesimal"
-"${CMAKE_INCLUDE_PATH}/sys/sexagesimal.h"
-"${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.cxx"
-"${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.hpp")
+file(GLOB_RECURSE SOURCES *.cpp *.h *.cxx *.hpp)
+add_library("${TARGET_STATIC_LIB}" STATIC "${SOURCES}")
 set_property(TARGET ${TARGET_STATIC_LIB} PROPERTY CXX_STANDARD 17)
 target_include_directories(${TARGET_STATIC_LIB} PUBLIC ${CMAKE_INCLUDE_PATH})
 
-add_library("${TARGET_SHARED_LIB}" SHARED 
-"${CMAKE_INCLUDE_PATH}/libasterix.cpp" 
-"${CMAKE_INCLUDE_PATH}/libasterix.h" 
-"${CMAKE_INCLUDE_PATH}/sys/sexagesimal"
-"${CMAKE_INCLUDE_PATH}/sys/sexagesimal.h"
-"${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.cxx"
-"${CMAKE_INCLUDE_PATH}/sys/sexagesimal_frmt.hpp")
+add_library("${TARGET_SHARED_LIB}" SHARED "${SOURCES}")
 set_property(TARGET "${TARGET_SHARED_LIB}" PROPERTY CXX_STANDARD 17)
 target_include_directories(${TARGET_SHARED_LIB} PUBLIC ${CMAKE_INCLUDE_PATH})
 set(LIB_OUT_PAT "/out/libs")
