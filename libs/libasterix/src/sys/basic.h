@@ -23,12 +23,41 @@ SOFTWARE.
 */
 #pragma once
 
+//#if defined(_MSC_VER)
+////  Microsoft 
+//#define ASX_EXPORT __declspec(dllexport)
+//#define ASX_IMPORT __declspec(dllimport)
+//#elif defined(__GNUC__)
+////  GCC
+//#if (__GNUC__ >= 4)
+//#define ASX_EXPORT __attribute__((visibility("default")))
+//#define ASX_IMPORT
+//#else
+//#define ASX_EXPORT extern "C"
+//#define ASX_IMPORT
+//#endif
+//#else
+////  do nothing and hope for the best?
+//#define ASX_EXPORT
+//#define ASX_IMPORT
+//#pragma warning Unknown dynamic link import/export semantics.
+//#endif
+
+#include <sys/basic>
+#include <stdio.h>
+#include <iostream>
+
 namespace asterix
 {
 	namespace sys
 	{
 		namespace types
 		{
+			class sys_utility
+			{
+			public:
+				
+			};
 			template<typename T>
 			struct basic_point
 			{
@@ -36,7 +65,7 @@ namespace asterix
 			};
 
 			template<typename T>
-			struct basic_point_3 : public basic_point<T>
+			struct basic_point_3 : public basic_point<T>, public sys_utility
 			{
 				T X;
 				T Y;
@@ -46,6 +75,14 @@ namespace asterix
 					X = T();
 					Y = T();
 					Z = T();
+				}
+				friend std::ostream& CDECL operator <<(std::ostream& os, basic_point_3<T>& bp) noexcept
+				{
+
+					os << "X=" << std::to_string(bp.X) << std::endl;
+					os << "Y=" << std::to_string(bp.Y) << std::endl;
+					os << "Z=" << std::to_string(bp.Z) << std::endl;		
+					return os;
 				}
 			};
 

@@ -16,11 +16,12 @@ using namespace asterix::sys::types;
 //using namespace asterix::sys::util;
 int main()
 {
-	asterix::sys::types::asx_point3f aaa2;
+	asterix::sys::types::asx_point2f aaa2;
 	asterix::sys::types::basic_point_3<double> aaa3;
-
 	
-	cout << "Hello CMake."  << endl;
+	
+	
+	cout << "Hello CMake." << aaa3 << endl;
 	
 #ifdef _WIN32
 	system("pause");
