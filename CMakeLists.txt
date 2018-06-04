@@ -30,6 +30,6 @@ project("asterix_solution")
 set(CMAKE_CXX_STANDARD 17)
 include("cmake/func.cmake")
 #file(MAKE_DIRECTORY "/build")
-add_subdirectory("libs/libasterix")
+add_subdirectory("lib/libasterix")
 add_subdirectory("asterix")
 

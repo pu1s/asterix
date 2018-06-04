@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
-#include "../libs/libasterix/src/libasterix.h"
-#include "../libs/libasterix/src/sys/basic.h"
+#include "../lib/libasterix/src/libasterix.h"
+#include "../lib/libasterix/src/sys/basic.h"
 #ifdef _WIN32
 #pragma comment(lib, "libasterix.lib") 
 #else
