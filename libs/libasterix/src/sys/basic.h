@@ -78,7 +78,6 @@ namespace asterix
 				}
 				friend std::ostream& CDECL operator <<(std::ostream& os, basic_point_3<T>& bp) noexcept
 				{
-
 					os << "X=" << std::to_string(bp.X) << std::endl;
 					os << "Y=" << std::to_string(bp.Y) << std::endl;
 					os << "Z=" << std::to_string(bp.Z) << std::endl;		
