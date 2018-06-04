@@ -21,7 +21,9 @@ int main()
 	
 	
 	
-	cout << "Hello CMake."<< endl; cout << aaa3 << endl;
+	cout << "Hello CMake."<< endl; 
+	cout << aaa3 << endl;
+	cout << aaa2 << endl;
 	
 #ifdef _WIN32
 	system("pause");

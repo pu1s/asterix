@@ -43,7 +43,6 @@ SOFTWARE.
 //#pragma warning Unknown dynamic link import/export semantics.
 //#endif
 
-#include <sys/basic>
 #include <stdio.h>
 #include <iostream>
 
@@ -53,16 +52,9 @@ namespace asterix
 	{
 		namespace types
 		{
-			class sys_utility
-			{
-			public:
-				
-			};
+			class sys_utility{};
 			template<typename T>
-			struct basic_point
-			{
-				
-			};
+			struct basic_point{};
 
 			template<typename T>
 			struct basic_point_3 : public basic_point<T>, public sys_utility
@@ -94,6 +86,12 @@ namespace asterix
 				{
 					X = T();
 					Y = T();
+				}
+				friend std::ostream& CDECL operator <<(std::ostream& os, basic_point_2<T>& bp) noexcept
+				{
+					os << "X=" << std::to_string(bp.X) << std::endl;
+					os << "Y=" << std::to_string(bp.Y) << std::endl;
+					return os;
 				}
 			};
 			

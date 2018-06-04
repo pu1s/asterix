@@ -25,7 +25,7 @@ SOFTWARE.
 
 #include "sexagesimal_common.h"
 #include "sexagesimal_common.c"
-#include "basic"
+#include "basic.h"
 //#include "sexagesimal_frmt.hpp"
 
 #ifndef NDEBUG
