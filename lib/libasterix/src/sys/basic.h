@@ -42,7 +42,10 @@ SOFTWARE.
 #include <string>
 #include <vector>
 
-
+#define ASX_FRMT_CUSTOM_DEFAULT_FLAG_DELIM	'%'
+#define ASX_FRMT_CUSTOM_EQUAL				'='
+#define ASX_FRMT_CUSTOM_SHOW_POS			'p'
+#define ASX_FRMT_CUSTOM_POINT				'P'
 
 
 namespace asterix
@@ -50,8 +53,7 @@ namespace asterix
 	namespace sys
 	{
 		namespace types
-		{
-			
+		{			
 			class sys_utility{};
 			template<typename T>
 			struct basic_point{};
@@ -68,6 +70,7 @@ namespace asterix
 					Y = T();
 					Z = T();
 				}
+				
 				friend std::ostream& CDECL operator <<(std::ostream& os, const basic_point_3<T>& bp) noexcept
 				{
 					os << "X=" << std::to_string(bp.X) << std::endl;
@@ -109,6 +112,8 @@ namespace asterix
 			typedef basic_point_2<double>	ASX_EXPORT asx_point2d;
 			typedef basic_point_3<float>	ASX_EXPORT asx_point3f;
 			typedef basic_point_3<double>	ASX_EXPORT asx_point3d;
+
+			
 		}
 	}
 }
