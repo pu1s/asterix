@@ -21,30 +21,27 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 #pragma once
 
-//#if defined(_MSC_VER)
-////  Microsoft 
-//#define ASX_EXPORT __declspec(dllexport)
-//#define ASX_IMPORT __declspec(dllimport)
-//#elif defined(__GNUC__)
-////  GCC
-//#if (__GNUC__ >= 4)
-//#define ASX_EXPORT __attribute__((visibility("default")))
-//#define ASX_IMPORT
-//#else
-//#define ASX_EXPORT extern "C"
-//#define ASX_IMPORT
-//#endif
-//#else
-////  do nothing and hope for the best?
-//#define ASX_EXPORT
-//#define ASX_IMPORT
-//#pragma warning Unknown dynamic link import/export semantics.
-//#endif
+#include "basic_global.h"
+
+
+//
+// Define Main Types Open Astronomical Library
+//
+#define ASX_WSTRP	const wchar_t*
+#define ASX_BOOL	bool
+#define ASX_UINT	unsigned int
+//
+
 
 #include <stdio.h>
 #include <iostream>
+#include <sstream>
+#include <string>
+
+
 
 namespace asterix
 {
@@ -92,6 +89,13 @@ namespace asterix
 					os << "X=" << std::to_string(bp.X) << std::endl;
 					os << "Y=" << std::to_string(bp.Y) << std::endl;
 					return os;
+				}
+				std::string CDECL to_str(const char* frm) noexcept
+				{
+					std::stringstream out("");
+					out << "X=" << std::to_string(X) << std::endl;
+					out << "Y=" << std::to_string(Y) << std::endl;
+					return out.str();
 				}
 			};
 			

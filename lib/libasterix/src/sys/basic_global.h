@@ -22,9 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef GLOBAL
-#define GLOBAL
-
+#pragma once
 //
 // Define global constant & function
 //
@@ -46,13 +44,13 @@ SOFTWARE.
 #define ASX_IMPORT __declspec(dllimport)
 #elif defined(__GNUC__)
 //  GCC
-	#if (__GNUC__ >= 4)
-		#define ASX_EXPORT __attribute__((visibility("default")))
-		#define ASX_IMPORT
-	#else
-		#define ASX_EXPORT extern "C"
-		#define ASX_IMPORT
-	#endif
+#if (__GNUC__ >= 4)
+#define ASX_EXPORT __attribute__((visibility("default")))
+#define ASX_IMPORT
+#else
+#define ASX_EXPORT extern "C"
+#define ASX_IMPORT
+#endif
 #else
 //  do nothing and hope for the best?
 #define ASX_EXPORT
@@ -67,20 +65,3 @@ SOFTWARE.
 #else 
 #define CDECL __cdecl
 #endif
-//
-// Define strong limitation
-//
-#define MIN_LIMIT_MIN 0
-#define MIN_LIMIT_MAX 60
-#define SEC_LIMIT_MIN 0.0
-#define SEC_LIMIT_MAX 60.0
-//
-// Define Main Types Open Astronomical Library
-//
-#define ASX_WSTRP	const wchar_t*
-#define ASX_BOOL	bool
-#define ASX_UINT	unsigned int
-//
-
-
-#endif //GLOBAL

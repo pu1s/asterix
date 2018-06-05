@@ -23,7 +23,7 @@ SOFTWARE.*/
 #ifndef SEXAGESIMAL_COMMON_H
 #define SEXAGESIMAL_COMMON_H
 
-#include "global"
+
 #include "stdio.h"
 namespace asterix
 {

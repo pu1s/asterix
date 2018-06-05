@@ -24,6 +24,6 @@ SOFTWARE.
 
 #pragma once
 
-#include "global"
+
 #include "sexagesimal.h"
 #include "sexagesimal_frmt.hpp"
