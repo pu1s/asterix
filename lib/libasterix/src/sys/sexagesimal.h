@@ -104,7 +104,7 @@ namespace asterix
 				/*
 				Шестидесятеричное представление угловых величин
 				*/
-				sexagesimal_tag()
+				sexagesimal_tag() noexcept
 				{
 					//
 					// начальная инициализация переменных

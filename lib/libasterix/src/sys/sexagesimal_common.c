@@ -35,6 +35,7 @@ namespace asterix
 		{
 			void make_hms(const signed int h, const unsigned int m, const double s, struct hms_t * hms)
 			{
+
 				BAD_BIT bad_bit = 0;
 				if (hms == nullptr)
 				{
@@ -69,10 +70,10 @@ namespace asterix
 
 			void make_dms(const signed int d, const unsigned int m, const double s, dms_t * dms)
 			{
+				if (dms == nullptr) return;
 				BAD_BIT bad_bit = 0;
-				if (dms != NULL)
+				if (dms != nullptr)
 				{
-					return;
 					bad_bit = 1;
 				}
 				if ((m < MIN_LIMIT_MIN) && (m > MIN_LIMIT_MAX))
