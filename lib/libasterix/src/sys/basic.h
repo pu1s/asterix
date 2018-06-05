@@ -40,6 +40,8 @@ SOFTWARE.
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
+
 
 
 
@@ -49,6 +51,7 @@ namespace asterix
 	{
 		namespace types
 		{
+			
 			class sys_utility{};
 			template<typename T>
 			struct basic_point{};
@@ -90,8 +93,11 @@ namespace asterix
 					os << "Y=" << std::to_string(bp.Y) << std::endl;
 					return os;
 				}
-				std::string CDECL to_str(const char* frm) noexcept
+				std::string CDECL to_str(const char* frmt) noexcept
 				{
+					std::stringstream _buff_frmt(frmt);
+					std::vector<std::string> _list_of_param;
+					for (std::string _item; std::getline(_buff_frmt, _item, '%'); _list_of_param.push_back(_item));
 					std::stringstream out("");
 					out << "X=" << std::to_string(X) << std::endl;
 					out << "Y=" << std::to_string(Y) << std::endl;
@@ -99,10 +105,10 @@ namespace asterix
 				}
 			};
 			
-			typedef basic_point_2<float>	asx_point2f;
-			typedef basic_point_2<double>	asx_point2d;
-			typedef basic_point_3<float>	asx_point3f;
-			typedef basic_point_3<double>	asx_point3d;
+			typedef basic_point_2<float>	ASX_EXPORT asx_point2f;
+			typedef basic_point_2<double>	ASX_EXPORT asx_point2d;
+			typedef basic_point_3<float>	ASX_EXPORT asx_point3f;
+			typedef basic_point_3<double>	ASX_EXPORT asx_point3d;
 		}
 	}
 }
