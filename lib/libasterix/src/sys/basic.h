@@ -54,66 +54,39 @@ namespace asterix
 	{
 		namespace types
 		{			
-			class sys_utility{};
-			template<typename T>
-			struct basic_point{};
-
-			template<typename T>
-			struct basic_point_3 : public basic_point<T>, public sys_utility
+			template<typename _t, size_t N, template<class T =_t, class _Alloc = std::allocator<_t>> class vec = std::vector>
+			struct basic_point_universal
 			{
-				T X;
-				T Y;
-				T Z;
-				basic_point_3<T>()
+			private:
+				vec<_t> _list;
+			public:
+				basic_point_universal()
 				{
-					X = T();
-					Y = T();
-					Z = T();
+					_list = vec<_t>(N);
 				}
+				vec<_t>& get_val()
+				{
+					return *_list;
+				}
+			};
+			
+			struct asx_basic_point_util
+			{
+				virtual std::string CDECL to_str() noexcept;
 				
-				friend std::ostream& CDECL operator <<(std::ostream& os, const basic_point_3<T>& bp) noexcept
-				{
-					os << "X=" << std::to_string(bp.X) << std::endl;
-					os << "Y=" << std::to_string(bp.Y) << std::endl;
-					os << "Z=" << std::to_string(bp.Z) << std::endl;		
-					return os;
-				}
 			};
 
 			template<typename T>
-			struct basic_point_2 : public basic_point<T>
+			struct asx_point2 : asx_basic_point_util
 			{
-				T X;
-				T Y;
-				basic_point_2<T>()
-				{
-					X = T();
-					Y = T();
-				}
-				friend std::ostream& CDECL operator <<(std::ostream& os, const basic_point_2<T>&  bp) noexcept
-				{
-					os << "X=" << std::to_string(bp.X) << std::endl;
-					os << "Y=" << std::to_string(bp.Y) << std::endl;
-					return os;
-				}
-				std::string CDECL to_str(const char* frmt) noexcept
-				{
-					std::stringstream _buff_frmt(frmt);
-					std::vector<std::string> _list_of_param;
-					for (std::string _item; std::getline(_buff_frmt, _item, '%'); _list_of_param.push_back(_item));
-					std::stringstream out("");
-					out << "X=" << std::to_string(X) << std::endl;
-					out << "Y=" << std::to_string(Y) << std::endl;
-					return out.str();
-				}
+			private:
+				T _x;
+				T _y;
+			public:
+				std::string CDECL to_str() noexcept override;
+				T operator[](const signed index) noexcept;
 			};
-			
-			typedef basic_point_2<float>	ASX_EXPORT asx_point2f;
-			typedef basic_point_2<double>	ASX_EXPORT asx_point2d;
-			typedef basic_point_3<float>	ASX_EXPORT asx_point3f;
-			typedef basic_point_3<double>	ASX_EXPORT asx_point3d;
-
-			
 		}
 	}
 }
+#include "basic.tmpl"
