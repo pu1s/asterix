@@ -50,8 +50,9 @@ namespace asterix
 				}
 				virtual std::string to_str(const std::ios::fmtflags& fl) noexcept
 				{
-					std::stringstream ss("Basic point.");
+					std::stringstream ss;
 					ss.setf(fl);
+					ss << std::fixed << 001.00000000 << std::endl;
 					std::string s; 
 					s.assign( ss.str());
 					return s;
@@ -70,15 +71,16 @@ namespace asterix
 				/*
 				Ctor
 				*/
-				basic_point2() noexcept
+				basic_point2()  noexcept
 				{
-					X = _Ty(); Y = _Ty();
+					X = _Ty();
+					Y = _Ty();
 				}
-
+			
 				/*
 				Ctor with params
 				*/
-				basic_point2(const _Ty& x, const _Ty& y) noexcept
+				basic_point2(const _Ty& x, const _Ty& y)  noexcept
 				{
 					X = x;
 					Y = y;
