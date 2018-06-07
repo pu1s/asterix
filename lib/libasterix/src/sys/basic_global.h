@@ -26,9 +26,12 @@ SOFTWARE.
 //
 // Define global constant & function
 //
-#define PI								3.14159265358979323846
+#define PI	3.14159265358979323846
 #define TO_RAD(GRAD) ((double)((GRAD)*(PI))/180)
 #define TO_GRAD(RAD) ((double)((RAD)*180)/(PI))
+
+#ifndef API_EXPORT
+#define API_EXPORT
 //
 // Exports
 //
@@ -38,30 +41,45 @@ SOFTWARE.
 // Source: Explicitly exporting shared library functions in Linux
 // https://stackoverflow.com/questions/2164827/explicitly-exporting-shared-library-functions-in-linux/2164962
 //
-#if defined(_MSC_VER)
-//  Microsoft 
-#define ASX_EXPORT __declspec(dllexport)
-#define ASX_IMPORT __declspec(dllimport)
-#elif defined(__GNUC__)
-//  GCC
-#if (__GNUC__ >= 4)
-#define ASX_EXPORT __attribute__((visibility("default")))
-#define ASX_IMPORT
+#if defined(_MSC_VER) //  Microsoft 
+
+	#ifdef API_EXPORT
+		#define __asx__api__ __declspec(dllexport)
+	#else
+		#define __asx__api__ __declspec(dllimport)
+	#endif
+#elif defined(__GNUC__) //  GCC
+	
+	#if (__GNUC__ >= 4)
+		#ifdef API_EXPORT
+			#define __asx__api__ __attribute__((visibility("default")))
+		#else
+			#define __asx__api__
+		#endif 
+	#elseif(__GNUC__ < 4)
+		#ifdef API_EXPORT
+			#define __asx__api__ extern "C"
+		#else
+			#define __asx__api__
+		#endif
+	#endif
 #else
-#define ASX_EXPORT extern "C"
-#define ASX_IMPORT
+	//  do nothing and hope for the best?
+	#define ASX_EXPORT
+	#define ASX_IMPORT
+	#pragma warning Unknown dynamic link import/export semantics.
 #endif
-#else
-//  do nothing and hope for the best?
-#define ASX_EXPORT
-#define ASX_IMPORT
-#pragma warning Unknown dynamic link import/export semantics.
-#endif
+#endif // !EXPORT
+
+
+
+#define __export__ ASX_EXPORT
+#define __import__ ASX_IMPORT
 //
 // cdecl definition
 //
 #if defined __GNUC__
-#define CDECL __attribute__((__cdecl__))
+#define __cdecl__ __attribute__((__cdecl__))
 #else 
-#define CDECL __cdecl
+#define __cdecl__ __cdecl
 #endif

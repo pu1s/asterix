@@ -26,16 +26,6 @@ SOFTWARE.
 
 #include "basic_global.h"
 
-
-//
-// Define Main Types Open Astronomical Library
-//
-#define ASX_WSTRP	const wchar_t*
-#define ASX_BOOL	bool
-#define ASX_UINT	unsigned int
-//
-
-
 #include <stdio.h>
 #include <iostream>
 #include <sstream>
@@ -50,38 +40,129 @@ namespace asterix
 	{
 		namespace types
 		{			
-			template<typename _t, size_t N, template<class T =_t, class _Alloc = std::allocator<_t>> class vec = std::vector>
-			struct basic_point_universal
-			{
-			private:
-				vec<_t> _list;
-			public:
-				basic_point_universal()
-				{
-					_list = vec<_t>(N);
-				}
-				vec<_t>& get_val()
-				{
-					return *_list;
-				}
-			};
 			
-			struct asx_basic_point_util
+			struct basic_point_prototype
 			{
-				virtual std::string CDECL to_str() noexcept;
-				
+			public:
+				virtual std::string to_str() noexcept
+				{
+					std::string s("Basic point."); return s;
+				}
+				virtual std::string to_str(const std::ios::fmtflags& fl) noexcept
+				{
+					std::stringstream ss("Basic point.");
+					ss.setf(fl);
+					std::string s; 
+					s.assign( ss.str());
+					return s;
+				}
 			};
 
-			template<typename T>
-			struct asx_point2 : asx_basic_point_util
+			/*
+			Basic representation on 2D point <STL variant>
+			*/
+			template<typename _Ty>
+			struct basic_point2 : public basic_point_prototype
 			{
-			private:
-				T _x;
-				T _y;
-			public:
-				std::string CDECL to_str() noexcept override;
-				T CDECL operator[](const signed index) noexcept;
+				_Ty X; // X
+				_Ty Y; // Y
+
+				/*
+				Ctor
+				*/
+				basic_point2() noexcept
+				{
+					X = _Ty(); Y = _Ty();
+				}
+
+				/*
+				Ctor with params
+				*/
+				basic_point2(const _Ty& x, const _Ty& y) noexcept
+				{
+					X = x;
+					Y = y;
+				}
+
+				/*
+				To string
+				*/
+				std::string to_str() noexcept override
+				{
+					std::string x_str = std::to_string(X);
+					std::string y_str = std::to_string(Y);
+					std::string s(""); 
+					s.append("X= ");
+					s.append(x_str.c_str());
+					s.append(" ");
+					s.append("Y= ");
+					s.append(y_str.c_str());
+					s.append("\r\n");
+					return s;
+				}
 			};
+
+			/*
+			Representation on 2D point with float value
+			*/
+			typedef  basic_point2<float> point2f;
+
+			/*
+			Representation on 2D point with double value
+			*/
+			typedef  basic_point2<double> point2d;
+
+			/*
+			Basic representation on 3D point <STL variant>
+			*/
+			template<typename _Ty>
+			struct basic_point3 : public basic_point_prototype
+			{
+				_Ty X;
+				_Ty Y;
+				_Ty Z;
+
+				/*
+				Ctor
+				*/
+				basic_point3() noexcept
+				{
+					_Ty X = _Ty();
+					_Ty Y = _Ty();
+					_Ty Z = _Ty();
+				}
+
+				/*
+				Ctor with params
+				*/
+				basic_point3(const _Ty& x, const _Ty& y, const _Ty z) noexcept
+				{
+					_Ty X = x;
+					_Ty Y = y;
+					_Ty Z = z;
+				}
+
+				/*
+				To string
+				*/
+				std::string to_str() noexcept override
+				{
+					std::string x_str = std::to_string(X);
+					std::string y_str = std::to_string(Y);
+					std::string z_str = std::to_string(Z);
+					std::string s("");
+					s.append("X= ");
+					s.append(x_str.c_str());
+					s.append(" ");
+					s.append("Y= ");
+					s.append(y_str.c_str());
+					s.append("Z= ");
+					s.append(z_str.c_str());
+					s.append("\r\n");
+					return s;
+				}
+			};
+
 		}
 	}
 }

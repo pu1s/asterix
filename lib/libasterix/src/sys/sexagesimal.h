@@ -122,7 +122,7 @@ namespace asterix
 				/*
 				Пересчет из натурального числа в угловые величины
 				*/
-				inline void CDECL _asx_swap_arcdata(
+				inline void __cdecl__ _asx_swap_arcdata(
 					const double& _in_val,													// значение в градусах, радианах
 					const asx_arcdata_type_t _in_arcdata_type,								// флаг: градусы | радианы
 					const asx_coordinate_type _in_coordinate_type = alt_lon_type::UNKNOWN	// флаг: склонение  | прямое восхождение
@@ -207,7 +207,7 @@ namespace asterix
 				/*
 				Возвращает значение угловой величины в градусах дуги (вещественное) 
 				*/
-				double CDECL get_grad_value(void) const noexcept
+				double __cdecl__ get_grad_value(void) const noexcept
 				{
 						return _m_arcdata.arcgrad;
 				}
@@ -215,11 +215,11 @@ namespace asterix
 				/*
 				Возвращает значение угловой величины в радианах дуги (вещественное)
 				*/
-				double CDECL get_radian_value(void) const noexcept
+				double __cdecl__ get_radian_value(void) const noexcept
 				{
 					return _m_arcdata.arcrad;
 				}
-				double CDECL get_value(const asx_arcdata_type_t arcdata_type) const noexcept
+				double __cdecl__ get_value(const asx_arcdata_type_t arcdata_type) const noexcept
 				{
 					switch (arcdata_type)
 					{
@@ -235,7 +235,7 @@ namespace asterix
 				/*
 				Возвращает значение угловой величины (строка)
 				*/
-				std::string CDECL to_string() noexcept
+				std::string __cdecl__ to_string() noexcept
 				{
 					return "";
 					// TODO: n impl
@@ -250,7 +250,7 @@ namespace asterix
 				/*
 				Присваивает значение выраженное в градусах дуги (вещественное)
 				*/
-				void CDECL set_grad(
+				void __cdecl__ set_grad(
 					const double& arcgrad,												// градусы дуги (вещественное)
 					const asx_coordinate_type coord_type = asx_coordinate_type::UNKNOWN	// тип координаты
 				) noexcept
@@ -261,7 +261,7 @@ namespace asterix
 				/*
 				Присваивает значение выраженное в радианах дуги (вещественное)
 				*/
-				void CDECL set_radian(
+				void __cdecl__ set_radian(
 					const double& arcrad,												// радианы (вещественное)
 					const asx_coordinate_type coord_type = asx_coordinate_type::UNKNOWN	// тип координаты
 				) noexcept
@@ -272,7 +272,7 @@ namespace asterix
 				/*
 				Возвращает ссылку на тип координаты
 				*/
-				const asx_coordinate_type& CDECL get_coordinate_type(void) noexcept
+				const asx_coordinate_type& __cdecl__ get_coordinate_type(void) noexcept
 				{
 					return _m_coord_type;
 				}
