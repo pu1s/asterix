@@ -42,10 +42,6 @@ SOFTWARE.
 #include <string>
 #include <vector>
 
-#define ASX_FRMT_CUSTOM_DEFAULT_FLAG_DELIM	'%'
-#define ASX_FRMT_CUSTOM_EQUAL				'='
-#define ASX_FRMT_CUSTOM_SHOW_POS			'p'
-#define ASX_FRMT_CUSTOM_POINT				'P'
 
 
 namespace asterix
@@ -84,7 +80,7 @@ namespace asterix
 				T _y;
 			public:
 				std::string CDECL to_str() noexcept override;
-				T operator[](const signed index) noexcept;
+				T CDECL operator[](const signed index) noexcept;
 			};
 		}
 	}

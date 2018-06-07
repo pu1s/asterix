@@ -8,7 +8,7 @@ template<typename T> std::string asterix::sys::types::asx_point2<T>::to_str() no
 	return "PPPP";
 }
 template<typename T>
-T asterix::sys::types::asx_point2<T>::operator[](const signed  index) noexcept
+T asterix::sys::types::asx_point2<T>::operator[](const signed index) noexcept
 {
 		switch(index)
 		{
@@ -29,3 +29,13 @@ T asterix::sys::types::asx_point2<T>::operator[](const signed  index) noexcept
 			}
 		}
 }
+
+/*
+template<typename T>
+T& asterix::sys::types::asx_point2<T>::operator=(const asx_point2 & l) noexcept
+{
+	this->_x = l._x;
+	this->_y = l._y;
+	return *this;
+}
+*/
