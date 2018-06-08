@@ -52,7 +52,7 @@ namespace asterix
 			template<typename _Key, typename _Value>
 			struct basic_dynamic_pair
 			{
-			protected:
+			private:
 				_Key*		_key;
 				_Value*		_value;
 			public:
@@ -60,7 +60,10 @@ namespace asterix
 				{
 
 				}
+				basic_dynamic_pair() noexcept : _key(new _Key()), _value(new _Value())
+				{
 
+				}
 				~basic_dynamic_pair()
 				{
 					delete _key;
@@ -89,15 +92,12 @@ namespace asterix
 				}
 			};
 
-			typedef  basic_dynamic_pair<std::string, double>	dynamic_pair_d;
-			typedef  basic_dynamic_pair<std::string, float>		dynamic_pair_f;
-
-			template<typename _Key, typename _Value>
-			struct dynamic_pair
+			template<template<typename _Key_Name, typename _Key_Value> class _Pair = basic_dynamic_pair>
+			struct dynamic_pair_f
 			{
-				/*_Dyn<std::string, T> _pair;*/
+				typedef _Pair<std::string, float> pair_data
 			};
-			
+
 			struct basic_dynamic_point_prototype
 			{
 				virtual std::string to_str() noexcept = 0;
