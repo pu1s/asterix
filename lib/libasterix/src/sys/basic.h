@@ -28,6 +28,7 @@ SOFTWARE.
 
 #include <stdio.h>
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -39,24 +40,67 @@ namespace asterix
 	namespace sys
 	{
 		namespace types
-		{			
-			
+		{
+
 			struct basic_point_prototype
 			{
 			public:
-				virtual std::string to_str() noexcept
+				virtual std::string to_str() noexcept = 0;
+				//virtual std::string to_str(const std::ios::fmtflags& fl) noexcept = 0;
+			};
+
+			template<typename _Key, typename _Value>
+			struct basic_dynamic_pair
+			{
+			protected:
+				_Key*		_key;
+				_Value*		_value;
+			public:
+				basic_dynamic_pair() noexcept : _key(new _Key()), _value(new _Value())
 				{
-					std::string s("Basic point."); return s;
+
 				}
-				virtual std::string to_str(const std::ios::fmtflags& fl) noexcept
+
+				~basic_dynamic_pair()
 				{
-					std::stringstream ss;
-					ss.setf(fl);
-					ss << std::fixed << 001.00000000 << std::endl;
-					std::string s; 
-					s.assign( ss.str());
-					return s;
+					delete _key;
+					delete _value;
 				}
+
+				void set(const _Key& key, const _Value& value) noexcept
+				{
+					*_key = key;
+					*_value = value;
+				}
+
+				basic_dynamic_pair& get() noexcept
+				{
+					return (*this);
+				}
+
+				_Key& get_key() noexcept
+				{
+					return (*_key);
+				}
+
+				_Value& get_value() noexcept
+				{
+					return (*_value);
+				}
+			};
+
+			typedef  basic_dynamic_pair<std::string, double>	dynamic_pair_d;
+			typedef  basic_dynamic_pair<std::string, float>		dynamic_pair_f;
+
+			template<typename _Key, typename _Value>
+			struct dynamic_pair
+			{
+				/*_Dyn<std::string, T> _pair;*/
+			};
+			
+			struct basic_dynamic_point_prototype
+			{
+				virtual std::string to_str() noexcept = 0;
 			};
 
 			/*
@@ -76,11 +120,11 @@ namespace asterix
 					X = _Ty();
 					Y = _Ty();
 				}
-			
+
 				/*
 				Ctor with params
 				*/
-				basic_point2(const _Ty& x, const _Ty& y)  noexcept
+				basic_point2(const _Ty& x, const _Ty& y) noexcept
 				{
 					X = x;
 					Y = y;
@@ -93,7 +137,7 @@ namespace asterix
 				{
 					std::string x_str = std::to_string(X);
 					std::string y_str = std::to_string(Y);
-					std::string s(""); 
+					std::string s("");
 					s.append("X= ");
 					s.append(x_str.c_str());
 					s.append(" ");
@@ -164,7 +208,6 @@ namespace asterix
 					return s;
 				}
 			};
-
 		}
 	}
 }
