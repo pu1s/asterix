@@ -33,7 +33,7 @@ SOFTWARE.
 #include <string>
 #include <vector>
 
-
+#define asx asterix
 
 namespace asterix
 {
