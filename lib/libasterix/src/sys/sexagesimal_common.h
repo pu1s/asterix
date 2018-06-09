@@ -25,7 +25,7 @@ SOFTWARE.*/
 
 
 #include "stdio.h"
-namespace asx
+namespace asterix
 {
 	namespace sys
 	{

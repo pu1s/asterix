@@ -5,7 +5,7 @@
 #include <cstring>
 
 using namespace std;
-using namespace asx::sys::types;
+using namespace asterix::sys::types;
 //using namespace asterix::sys::util;
 int main()
 {

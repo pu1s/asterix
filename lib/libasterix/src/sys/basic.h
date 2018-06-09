@@ -33,8 +33,12 @@ SOFTWARE.
 #include <string>
 #include <vector>
 
+#define asx asterix
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 21b08c1... +*+*+
 namespace asterix
 {
 	namespace sys

@@ -51,7 +51,7 @@ SOFTWARE.
 #pragma warning(disable : 4244)
 
 
-namespace asx
+namespace asterix
 {
 	namespace sys
 	{
