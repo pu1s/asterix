@@ -61,39 +61,18 @@ namespace asx
 
 				basic_dynamic_pair(const _Key& key, const _Value& value) noexcept : _key(key), _value(value) {}
 
-				~basic_dynamic_pair()
-				{
-					delete _key;
-					delete _value;
-				}
+				~basic_dynamic_pair();
 
-				void set(const _Key& key, const _Value& value) noexcept
-				{
-					*_key = key;
-					*_value = value;
-				}
+				void set(const _Key& key, const _Value& value) noexcept;
 
-				basic_dynamic_pair& get() noexcept
-				{
-					return (*this);
-				}
+				basic_dynamic_pair& get() noexcept;
 
-				_Key& get_key() noexcept
-				{
-					return (*_key);
-				}
+				_Key& get_key() noexcept;
 
-				_Value& get_value() noexcept
-				{
-					return (*_value);
-				}
+				_Value& get_value() noexcept;
 
-				basic_dynamic_pair& operator = (const basic_dynamic_pair& dp) noexcept
-				{
-					this->_key = dp._key;
-					this->_value = dp._value;
-					return (*this);
-				}
+				basic_dynamic_pair& operator = (const basic_dynamic_pair& dp) noexcept;
+				
 			};
 
 			/*
@@ -154,6 +133,7 @@ namespace asx
 					s.append(y_str.c_str());
 					s.append("\r\n");
 					return s;
+					
 				}
 			};
 
@@ -220,4 +200,4 @@ namespace asx
 		}
 	}
 }
-#include "basic.cti"
+#include "atomic.tli"

@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "sys/basic.h"
+#include "sys/atomic.hpp"
 
 
 #include <iostream>

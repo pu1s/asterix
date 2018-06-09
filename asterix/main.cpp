@@ -12,12 +12,12 @@
 //#pragma comment(lib, "asterix0.lib") 
 
 using namespace std;
-using namespace asterix::sys::types;
+using namespace asx::sys::types;
 //using namespace asterix::sys::util;
 int main()
 {
-	asterix::sys::types::asx_point2f aaa2;
-	asterix::sys::types::basic_point_3<double> aaa3;
+	asx::sys::types::asx_point2f aaa2;
+	asx::sys::types::basic_point_3<double> aaa3;
 	
 	
 	

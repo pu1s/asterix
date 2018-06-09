@@ -163,9 +163,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\lib\libasterix\src\libasterix.h" />
+    <ClInclude Include="..\..\lib\libasterix\src\sys\atomic.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\lib\libasterix\src\sys\basic.tmpl" />
+    <None Include="..\..\lib\libasterix\src\sys\atomic.tli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
