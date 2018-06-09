@@ -35,10 +35,7 @@ SOFTWARE.
 
 #define asx asterix
 
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 21b08c1... +*+*+
 namespace asterix
 {
 	namespace sys
@@ -64,9 +61,10 @@ namespace asterix
 				{
 
 				}
-				basic_dynamic_pair() noexcept : _key(new _Key()), _value(new _Value())
+				explicit basic_dynamic_pair(const _Key& key, const _Value& value) noexcept : basic_dynamic_pair()
 				{
-
+					*_key = key;
+					*_value = value;
 				}
 				~basic_dynamic_pair()
 				{
@@ -99,7 +97,7 @@ namespace asterix
 			template<template<typename _Key_Name, typename _Key_Value> class _Pair = basic_dynamic_pair>
 			struct dynamic_pair_f
 			{
-				typedef _Pair<std::string, float> pair_data
+				typedef _Pair<std::string, float> pair_data;
 			};
 
 			struct basic_dynamic_point_prototype
