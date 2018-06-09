@@ -33,13 +33,9 @@ SOFTWARE.
 #include <string>
 #include <vector>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 998b15a... + def ns asx
 
 
-namespace asx
+namespace asterix
 {
 	namespace sys
 	{
@@ -57,14 +53,17 @@ namespace asx
 			struct basic_dynamic_pair
 			{
 			private:
-				_Key *		_key;
+				_Key*		_key;
 				_Value*		_value;
 			public:
+				basic_dynamic_pair() noexcept : _key(new _Key()), _value(new _Value())
+				{
 
-				basic_dynamic_pair() noexcept : _key(new _Key()), _value(new _Value()) {}
+				}
+				basic_dynamic_pair() noexcept : _key(new _Key()), _value(new _Value())
+				{
 
-				basic_dynamic_pair(const _Key& key, const _Value& value) noexcept : _key(key), _value(value) {}
-
+				}
 				~basic_dynamic_pair()
 				{
 					delete _key;
@@ -91,26 +90,14 @@ namespace asx
 				{
 					return (*_value);
 				}
-
-				basic_dynamic_pair& operator = (const basic_dynamic_pair& dp) noexcept
-				{
-					this->_key = dp._key;
-					this->_value = dp._value;
-					return (*this);
-				}
 			};
 
-			/*
-			*/
 			template<template<typename _Key_Name, typename _Key_Value> class _Pair = basic_dynamic_pair>
 			struct dynamic_pair_f
 			{
-				typedef _Pair<std::string, float> pair_data;
+				typedef _Pair<std::string, float> pair_data
 			};
 
-			/*
-
-			*/
 			struct basic_dynamic_point_prototype
 			{
 				virtual std::string to_str() noexcept = 0;
@@ -137,7 +124,7 @@ namespace asx
 				/*
 				Ctor with params
 				*/
-				basic_point2(const _Ty& x, const _Ty& y) noexcept : basic_point2()
+				basic_point2(const _Ty& x, const _Ty& y) noexcept
 				{
 					X = x;
 					Y = y;
@@ -194,7 +181,7 @@ namespace asx
 				/*
 				Ctor with params
 				*/
-				basic_point3(const _Ty& x, const _Ty& y, const _Ty z) noexcept : basic_point3()
+				basic_point3(const _Ty& x, const _Ty& y, const _Ty z) noexcept
 				{
 					_Ty X = x;
 					_Ty Y = y;
@@ -224,4 +211,4 @@ namespace asx
 		}
 	}
 }
-#include "basic.cti"
+#include "basic.tmpl"
