@@ -50,7 +50,7 @@ namespace asx
 				//virtual std::string to_str(const std::ios::fmtflags& fl) noexcept = 0;
 			};
 
-			template<typename _Key, typename _Value>
+			template<typename _Tv, typename _Tk, typename _Value = _Tv, typename _Key = _Tk>
 			struct basic_dynamic_pair
 			{
 			private:
@@ -59,7 +59,7 @@ namespace asx
 			public:
 				basic_dynamic_pair() noexcept;
 				
-				basic_dynamic_pair(const _Key& key, const _Value& value) noexcept;
+				/*basic_dynamic_pair(const _Key& key, const _Value& value) noexcept;
 				
 				~basic_dynamic_pair();
 				
@@ -75,13 +75,13 @@ namespace asx
 
 				bool operator ==(const basic_dynamic_pair& left) const noexcept;
 
-				bool operator !=(const basic_dynamic_pair& left) const noexcept;
+				bool operator !=(const basic_dynamic_pair& left) const noexcept;*/
 			};
 
-			template<template<typename _Key_Name, typename _Key_Value> class _Pair = basic_dynamic_pair>
-			struct dynamic_pair_f
+			template<template<typename T, typename U = std::string, typename _Key_Name = U, typename _Key_Value = T> class _Pair = basic_dynamic_pair>
+			struct dynamic_pair
 			{
-				typedef _Pair<std::string, float> pair_data;
+				
 			};
 
 			struct basic_dynamic_point_prototype
@@ -197,15 +197,14 @@ namespace asx
 		}
 	}
 }
-template<typename _Key, typename _Value>
-bool asx::sys::types::basic_dynamic_pair<_Key, _Value>::operator==(const asx::sys::types::basic_dynamic_pair<_Key, _Value> & left) const noexcept
-{
-	return this->_key == left._key && this->_value == left._value ? true : false;
-}
 
-template<typename _Key, typename _Value>
-bool asx::sys::types::basic_dynamic_pair<_Key, _Value>::operator!=(const asx::sys::types::basic_dynamic_pair<_Key, _Value> & left) const noexcept
-{
-	return *this == left;
-}
 #include "atom.template"
+
+
+
+namespace asx
+{
+	typedef sys::types::basic_dynamic_pair<std::string, float>  __asx__api__ dynamic_pair_f;
+	typedef sys::types::basic_dynamic_pair<std::string, double> __asx__api__ dynamic_pair_d;
+	typedef sys::types::dynamic_pair<asx::sys::types::basic_dynamic_pair> __asx__api__ _dynamic_pair;
+}
