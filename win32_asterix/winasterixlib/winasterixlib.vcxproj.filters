@@ -29,9 +29,6 @@
     <ClInclude Include="..\..\lib\libasterix\src\sys\global.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\LIB\LIBASTERIX\SRC\SYS\BASIC.H">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\lib\libasterix\src\sys\atom.template">
