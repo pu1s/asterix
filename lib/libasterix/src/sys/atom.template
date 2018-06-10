@@ -43,6 +43,7 @@ template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
 _Value & asx::sys::types::basic_dynamic_pair<_Key, _Value>::get_value() noexcept
 {
 	return (*_value);
+<<<<<<< HEAD
 }
 
 template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
@@ -69,4 +70,6 @@ asx::sys::types::basic_dynamic_pair<_Tv, _Tk, _Value, _Key>::basic_dynamic_pair(
 {
 	_key = new _Key();
 	_value	= new _Value();
+=======
+>>>>>>> parent of b13e8a0... new
 }
