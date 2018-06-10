@@ -44,3 +44,11 @@ _Value & asx::sys::types::basic_dynamic_pair<_Key, _Value>::get_value() noexcept
 {
 	return (*_value);
 }
+
+template<typename _Key, typename _Value>
+asx::sys::types::basic_dynamic_pair<_Key, _Value> & asx::sys::types::basic_dynamic_pair<_Key, _Value>::operator=(const asx::sys::types::basic_dynamic_pair<_Key, _Value> & other) noexcept
+{
+	this->_key = other._key;
+	this->_value = other._value;
+	return (*this);
+}

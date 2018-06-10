@@ -70,6 +70,12 @@ namespace asx
 				_Key& get_key() noexcept;
 				
 				_Value& get_value() noexcept;
+
+				basic_dynamic_pair& operator =(const basic_dynamic_pair& other) noexcept;
+
+				bool operator ==(const basic_dynamic_pair& left) const noexcept;
+
+				bool operator !=(const basic_dynamic_pair& left) const noexcept;
 			};
 
 			template<template<typename _Key_Name, typename _Key_Value> class _Pair = basic_dynamic_pair>
@@ -190,5 +196,16 @@ namespace asx
 			};
 		}
 	}
+}
+template<typename _Key, typename _Value>
+bool asx::sys::types::basic_dynamic_pair<_Key, _Value>::operator==(const asx::sys::types::basic_dynamic_pair<_Key, _Value> & left) const noexcept
+{
+	return this->_key == left._key && this->_value == left._value ? true : false;
+}
+
+template<typename _Key, typename _Value>
+bool asx::sys::types::basic_dynamic_pair<_Key, _Value>::operator!=(const asx::sys::types::basic_dynamic_pair<_Key, _Value> & left) const noexcept
+{
+	return *this == left;
 }
 #include "atom.template"

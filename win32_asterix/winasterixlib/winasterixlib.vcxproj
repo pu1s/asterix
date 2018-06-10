@@ -164,7 +164,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\lib\libasterix\src\libasterix.h" />
     <ClInclude Include="..\..\lib\libasterix\src\sys\atom.h" />
-    <ClInclude Include="..\..\LIB\LIBASTERIX\SRC\SYS\BASIC.H" />
     <ClInclude Include="..\..\lib\libasterix\src\sys\global.h" />
   </ItemGroup>
   <ItemGroup>
