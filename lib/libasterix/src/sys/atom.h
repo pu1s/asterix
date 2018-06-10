@@ -71,12 +71,15 @@ namespace asx
 				
 				_Value& get_value() noexcept;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 				basic_dynamic_pair& operator =(const basic_dynamic_pair& other) noexcept;
 
 				bool operator ==(const basic_dynamic_pair& left) const noexcept;
 
 				bool operator !=(const basic_dynamic_pair& left) const noexcept;*/
+=======
+>>>>>>> parent of b13e8a0... new
 =======
 >>>>>>> parent of b13e8a0... new
 			};
@@ -201,6 +204,7 @@ namespace asx
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "atom.template"
 
@@ -212,6 +216,9 @@ namespace asx
 	typedef sys::types::basic_dynamic_pair<std::string, double> __asx__api__ dynamic_pair_d;
 	typedef sys::types::dynamic_pair<asx::sys::types::basic_dynamic_pair> __asx__api__ _dynamic_pair;
 }
+=======
+#include "atom.template"
+>>>>>>> parent of b13e8a0... new
 =======
 #include "atom.template"
 >>>>>>> parent of b13e8a0... new
