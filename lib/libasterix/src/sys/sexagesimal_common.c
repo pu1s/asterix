@@ -27,7 +27,7 @@ SOFTWARE.
 #define hms_out(x) (print_hms(x))
 #define dms_out(x) (print_dms(x))
 
-namespace asterix
+namespace asx
 {
 	namespace sys
 	{

@@ -1,0 +1,46 @@
+
+template<typename _Key, typename _Value>
+asx::sys::types::basic_dynamic_pair<_Key, _Value>::basic_dynamic_pair() noexcept
+{
+	_key	= new _Key();
+	_value	= new _Value();
+}
+
+template<typename _Key, typename _Value>
+asx::sys::types::basic_dynamic_pair<_Key, _Value>::~basic_dynamic_pair()
+{
+	delete	_key;
+	delete	_value;
+}
+
+template<typename _Key, typename _Value>
+void asx::sys::types::basic_dynamic_pair<_Key, _Value>::set(const _Key & key, const _Value & value) noexcept
+{
+	*_key		= key;
+	*_value		= value;
+}
+
+template<typename _Key, typename _Value>
+asx::sys::types::basic_dynamic_pair<_Key, _Value> & asx::sys::types::basic_dynamic_pair<_Key, _Value>::get() noexcept
+{
+	return (*this);
+}
+
+template<typename _Key, typename _Value>
+asx::sys::types::basic_dynamic_pair<_Key, _Value>::basic_dynamic_pair(const _Key & key, const _Value & value) noexcept 
+{
+	_key	= new _Key(key);
+	_value	= new _Value(value);
+}
+
+template<typename _Key, typename _Value>
+_Key & asx::sys::types::basic_dynamic_pair<_Key, _Value>::get_key() noexcept
+{
+	return (*_key);
+}
+
+template<typename _Key, typename _Value>
+_Value & asx::sys::types::basic_dynamic_pair<_Key, _Value>::get_value() noexcept
+{
+	return (*_value);
+}
