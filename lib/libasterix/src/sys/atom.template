@@ -1,67 +1,72 @@
-/*
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-asx::sys::types::basic_dynamic_pair<_Key, _Value>::basic_dynamic_pair() noexcept
-{
-	_key	= new _Key();
-	_value	= new _Value();
-}
 
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-asx::sys::types::basic_dynamic_pair<_Key, _Value>::~basic_dynamic_pair()
+/*/#######################################################################################################
+template<typename _Value_Type, typename _Key_Type>
+asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::basic_dynamic_pair() noexcept
+{
+	_key = new _Key_Type();
+	_value = new _Value_Type();
+}
+template<typename _Value_Type, typename _Key_Type>
+asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::~basic_dynamic_pair()
 {
 	delete	_key;
 	delete	_value;
 }
-
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-void asx::sys::types::basic_dynamic_pair<_Key, _Value>::set(const _Key & key, const _Value & value) noexcept
+*/
+/*
+template<typename _Value_Type, typename _Key_Type>
+void asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::set(const _Value_Type& value, const _Key_Type& key) noexcept
 {
-	*_key		= key;
-	*_value		= value;
+	*_key = key;
+	*_value = value;
 }
 
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-asx::sys::types::basic_dynamic_pair<_Key, _Value> & asx::sys::types::basic_dynamic_pair<_Key, _Value>::get() noexcept
+template<typename _Value_Type, typename _Key_Type>
+asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type> & asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::get() noexcept
 {
 	return (*this);
 }
 
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-asx::sys::types::basic_dynamic_pair<_Key, _Value>::basic_dynamic_pair(const _Key & key, const _Value & value) noexcept 
+template<typename _Value_Type, typename _Key_Type>
+asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::basic_dynamic_pair(const _Value_Type& value, const _Key_Type& key) noexcept
 {
-	_key	= new _Key(key);
-	_value	= new _Value(value);
+	_key = new _Key_Type(key);
+	_value = new _Value_Type(value);
 }
 
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-_Key & asx::sys::types::basic_dynamic_pair<_Key, _Value>::get_key() noexcept
+template<typename _Value_Type, typename _Key_Type>
+_Key_Type & asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::get_key() noexcept
 {
 	return (*_key);
 }
 
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-_Value & asx::sys::types::basic_dynamic_pair<_Key, _Value>::get_value() noexcept
+template<typename _Value_Type, typename _Key_Type>
+_Value_Type & asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::get_value() noexcept
 {
 	return (*_value);
 
 }
 
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-asx::sys::types::basic_dynamic_pair<_Key, _Value> & asx::sys::types::basic_dynamic_pair<_Key, _Value>::operator=(const asx::sys::types::basic_dynamic_pair<_Key, _Value> & other) noexcept
+template<typename _Value_Type, typename _Key_Type>
+asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type> & asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::operator=(const asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type> & other) noexcept
 {
 	this->_key = other._key;
 	this->_value = other._value;
 	return (*this);
 }
 
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-bool asx::sys::types::basic_dynamic_pair<_Key, _Value>::operator==(const asx::sys::types::basic_dynamic_pair<_Key, _Value> & left) const noexcept
+template<typename _Value_Type, typename _Key_Type>
+bool asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::operator==(const asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type> & left) const noexcept
 {
 	return (*_key == *(left._key)) & (*_value == *(left._value)) ? true : false;
 }
 
-template<typename _Tk, typename _Tv, typename _Key = _Tk, typename _Value = _Tv>
-bool asx::sys::types::basic_dynamic_pair<_Key, _Value>::operator!=(const asx::sys::types::basic_dynamic_pair<_Key, _Value> & left) const noexcept
+template<typename _Value_Type, typename _Key_Type>
+bool asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type>::operator!=(const asx::sys::types::basic_dynamic_pair<_Value_Type, _Key_Type> & left) const noexcept
 {
 	return *this == left;
-}*/
+}
+#####################################################################################################################
+*/	
+
+

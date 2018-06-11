@@ -50,40 +50,67 @@ namespace asx
 				//virtual std::string to_str(const std::ios::fmtflags& fl) noexcept = 0;
 			};
 
-			template<typename _Tv, typename _Tk, typename _Value = _Tv, typename _Key = _Tk>
+			template<typename _Value_Type, typename _Key_Type>
 			struct basic_dynamic_pair
 			{
-			private:
-				_Key*		_key;
-				_Value*		_value;
+			protected:
+				_Key_Type *		_key;
+				_Value_Type*	_value;
 			public:
-				basic_dynamic_pair() noexcept;
+
+				basic_dynamic_pair() noexcept
+				{
+					_key = new _Key_Type();
+					_value = new _Value_Type();
+				}
+					
+
+				basic_dynamic_pair(const _Value_Type& value, const _Key_Type& key) noexcept
+				{
+					_key = new _Key_Type(key);
+					_value = new _Value_Type(value);
+				}
 				
-				/*basic_dynamic_pair(const _Key& key, const _Value& value) noexcept;
+				~basic_dynamic_pair()
+				{
+					delete _key;
+					delete _value;
+				}
 				
-				~basic_dynamic_pair();
 				
-				void set(const _Key& key, const _Value& value) noexcept;
+				/*void set(const _Value_Type& value, const _Key_Type& key) noexcept;
 				
 				basic_dynamic_pair& get() noexcept;
 				
-				_Key& get_key() noexcept;
+				_Key_Type& get_key() noexcept;
 				
-				_Value& get_value() noexcept;
+				_Value_Type& get_value() noexcept;
 
 
 				basic_dynamic_pair& operator =(const basic_dynamic_pair& other) noexcept;
 
 				bool operator ==(const basic_dynamic_pair& left) const noexcept;
 
-				bool operator !=(const basic_dynamic_pair& left) const noexcept;*/
-
+				bool operator !=(const basic_dynamic_pair& left) const noexcept;
+*/
 			};
 
-			template<template<typename T, typename U = std::string, typename _Key_Name = U, typename _Key_Value = T> class _Pair = basic_dynamic_pair>
+			template<typename T, typename U, template<class, class> class pair = basic_dynamic_pair>
 			struct dynamic_pair
 			{
-				
+				typedef pair<T, U> dynamic_pair_t;
+			private:
+				dynamic_pair_t* _pair_data;
+			public:
+				dynamic_pair() noexcept
+				{
+					_pair_data = new dynamic_pair_t();
+				}
+
+				dynamic_pair(const T & val, const U& key) noexcept
+				{
+					_pair_data = new dynamic_pair_t(val, key);
+				}
 			};
 
 			struct basic_dynamic_point_prototype
@@ -133,6 +160,7 @@ namespace asx
 					s.append(y_str.c_str());
 					s.append("\r\n");
 					return s;
+					
 				}
 			};
 
@@ -201,16 +229,32 @@ namespace asx
 }
 
 
+
 #include "atom.template"
 
 
 
 namespace asx
 {
-	typedef sys::types::basic_dynamic_pair<std::string, float>  __asx__api__ dynamic_pair_f;
-	typedef sys::types::basic_dynamic_pair<std::string, double> __asx__api__ dynamic_pair_d;
-	typedef sys::types::dynamic_pair<asx::sys::types::basic_dynamic_pair> __asx__api__ _dynamic_pair;
+	
+	//typedef sys::types::std_dynamic_pair<double> __asx__api__ dynamic_pair;
 }
 
-#include "atom.template"
 
+template<typename T, typename U>
+struct A
+{
+	T x;
+	U z;
+};
+
+template<typename T, typename U, template<class, class> class C = A>
+struct B
+{
+	C<T, U> y;
+};
+
+
+ 
+
+ 
