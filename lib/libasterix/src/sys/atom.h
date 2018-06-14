@@ -33,6 +33,8 @@ SOFTWARE.
 #include <string>
 #include <vector>
 
+#include "diagnostic.h"
+
 
 
 
@@ -62,6 +64,7 @@ namespace asx
 				{
 					_key = new _Key_Type();
 					_value = new _Value_Type();
+
 				}
 					
 
@@ -69,10 +72,14 @@ namespace asx
 				{
 					_key = new _Key_Type(key);
 					_value = new _Value_Type(value);
+					
 				}
 				
 				~basic_dynamic_pair()
 				{
+#ifdef _DEBUG
+					std::cout << "basic_dynamic_pair " << "is deleted!" << std::endl;
+#endif // _DEBUG
 					delete _key;
 					delete _value;
 				}
@@ -99,17 +106,28 @@ namespace asx
 			struct dynamic_pair
 			{
 				typedef pair<T, U> dynamic_pair_t;
+				std::pair<int, int> p;
 			private:
 				dynamic_pair_t* _pair_data;
 			public:
 				dynamic_pair() noexcept
 				{
 					_pair_data = new dynamic_pair_t();
+#ifdef _DEBUG
+					std::cout << "dynamic_pair " << "is work!" << std::endl;
+#endif // _DEBUG
 				}
 
 				dynamic_pair(const T & val, const U& key) noexcept
 				{
 					_pair_data = new dynamic_pair_t(val, key);
+				}
+				~dynamic_pair()
+				{
+					//DEBUG_MESSAGE("aaa", asx::sys::diagnostic::asx_diagnostic_function_type::dtor);
+#ifdef _DEBUG
+					std::cout << "dynamic_pair " << "is deleted!" << std::endl;
+#endif // _DEBUG
 				}
 			};
 
@@ -234,11 +252,7 @@ namespace asx
 
 
 
-namespace asx
-{
-	
-	//typedef sys::types::std_dynamic_pair<double> __asx__api__ dynamic_pair;
-}
+
 
 
 template<typename T, typename U>

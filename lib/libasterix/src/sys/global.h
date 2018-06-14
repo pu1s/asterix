@@ -43,31 +43,31 @@ SOFTWARE.
 //
 #if defined(_MSC_VER) //  Microsoft 
 
-	#ifdef API_EXPORT
-		#define __asx__api__ __declspec(dllexport)
-	#else
-		#define __asx__api__ __declspec(dllimport)
-	#endif
+#ifdef API_EXPORT
+#define __asx__api__ __declspec(dllexport)
+#else
+#define __asx__api__ __declspec(dllimport)
+#endif
 #elif defined(__GNUC__) //  GCC
-	
-	#if (__GNUC__ >= 4)
-		#ifdef API_EXPORT
-			#define __asx__api__ __attribute__((visibility("default")))
-		#else
-			#define __asx__api__
-		#endif 
-	#elseif(__GNUC__ < 4)
-		#ifdef API_EXPORT
-			#define __asx__api__ extern "C"
-		#else
-			#define __asx__api__
-		#endif
-	#endif
+
+#if (__GNUC__ >= 4)
+#ifdef API_EXPORT
+#define __asx__api__ __attribute__((visibility("default")))
+#else
+#define __asx__api__
+#endif 
+#elseif(__GNUC__ < 4)
+#ifdef API_EXPORT
+#define __asx__api__ extern "C"
+#else
+#define __asx__api__
+#endif
+#endif
 #else
 	//  do nothing and hope for the best?
-	#define ASX_EXPORT
-	#define ASX_IMPORT
-	#pragma warning Unknown dynamic link import/export semantics.
+#define ASX_EXPORT
+#define ASX_IMPORT
+#pragma warning Unknown dynamic link import/export semantics.
 #endif
 #endif // !EXPORT
 
@@ -83,3 +83,9 @@ SOFTWARE.
 #else 
 #define __cdecl__ __cdecl
 #endif
+
+
+#include <cstdio>
+#include <iostream>
+
+
