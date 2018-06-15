@@ -169,7 +169,6 @@
     <ClInclude Include="..\..\lib\libasterix\src\libasterix.h" />
     <ClInclude Include="..\..\lib\libasterix\src\sys\atom.h" />
     <ClInclude Include="..\..\lib\libasterix\src\sys\global.h" />
-    <ClInclude Include="diagnostic.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\lib\libasterix\src\sys\atom.template" />
