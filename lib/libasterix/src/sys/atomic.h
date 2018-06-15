@@ -25,6 +25,7 @@ SOFTWARE.
 #pragma once
 
 #include "global.h"
+#include "format.h"
 
 #include <stdio.h>
 #include <iostream>
@@ -32,6 +33,7 @@ SOFTWARE.
 #include <sstream>
 #include <string>
 #include <vector>
+
 
 //#include "diagnostic.h"
 
