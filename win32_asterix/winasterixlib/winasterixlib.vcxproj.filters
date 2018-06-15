@@ -23,15 +23,15 @@
     <ClInclude Include="..\..\lib\libasterix\src\libasterix.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lib\libasterix\src\sys\atom.h">
+    <ClInclude Include="..\..\lib\libasterix\src\sys\global.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lib\libasterix\src\sys\global.h">
+    <ClInclude Include="..\..\lib\libasterix\src\sys\atomic.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\lib\libasterix\src\sys\atom.template">
+    <None Include="..\..\lib\libasterix\src\sys\atomic.template">
       <Filter>Исходные файлы</Filter>
     </None>
   </ItemGroup>

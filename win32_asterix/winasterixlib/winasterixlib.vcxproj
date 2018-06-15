@@ -167,11 +167,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\lib\libasterix\src\libasterix.h" />
-    <ClInclude Include="..\..\lib\libasterix\src\sys\atom.h" />
+    <ClInclude Include="..\..\lib\libasterix\src\sys\atomic.h" />
     <ClInclude Include="..\..\lib\libasterix\src\sys\global.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\lib\libasterix\src\sys\atom.template" />
+    <None Include="..\..\lib\libasterix\src\sys\atomic.template" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

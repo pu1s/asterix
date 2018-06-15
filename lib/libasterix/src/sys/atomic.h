@@ -53,28 +53,61 @@ namespace asx
 
 			
 			template<typename T>
-			struct point_atom : public iPrintable
+			struct point_atomic : public iPrintable
 			{
 			private:
-				T* m_atom;
+				T* m_atomic;
 			public:
+				point_atomic() noexcept
+				{
+					m_atomic = new T();
+				}
+				point_atomic(const T& val) noexcept
+				{
+					m_atomic = new T(val);
+				}
+				point_atomic(T&& val) noexcept
+				{
+					m_atomic = new T();
+					*m_atomic = val;
+				}
 				// Унаследовано через iPrintable
 				virtual std::string ToString() override
 				{
-					return std::to_string(*m_atom);
+					return std::to_string(*m_atomic);
 				}
-
+				virtual ~point_atomic()
+				{
+					delete m_atomic;
+				}
+				virtual void operator=(const T& val) noexcept
+				{
+					*m_atomic = static_cast<T>(val);
+				}
+				virtual point_atomic& operator()(point_atomic& rv) noexcept
+				{
+					*m_atomic = rv.m_atomic;
+					return (*this);
+				}
+				virtual T GetValue() noexcept
+				{
+					return *m_atomic;
+				}
+				virtual void Clear() const
+				{
+					*m_atomic = T();
+				}
 			};
 
 			template<typename T>
 			struct point
 			{
-				point_atom<T> X;
+				typedef point_atomic<T> PTUNIT;
 			};
 		}
 	}
 }
 
 
-#include "atom.template"
+#include "atomic.template"
  
