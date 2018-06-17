@@ -46,18 +46,9 @@ namespace asx
 	{
 		namespace types
 		{
-			struct iFormatible
-			{
-			public:
-				const char* fmt_mask;
-				virtual void SetFormat(const char* fmt) noexcept = 0;
-				virtual const char* GetFormat() noexcept = 0;
-			};
-
 			struct iPrintable
 			{
 			public:
-				virtual std::string ToString() = 0;
 				virtual std::string ToString(const char* fmt) = 0;
 			};
 
@@ -80,11 +71,7 @@ namespace asx
 					m_atomic = new T();
 					*m_atomic = val;
 				}
-				// Унаследовано через iPrintable
-				virtual std::string ToString() override
-				{
-					return std::to_string(*m_atomic);
-				}
+				
 				virtual ~point_atomic()
 				{
 					delete m_atomic;
@@ -108,7 +95,7 @@ namespace asx
 				}
 
 				// Унаследовано через iPrintable
-				virtual std::string ToString(const char * fmt) override
+				virtual std::string ToString(const char * fmt ) override
 				{
 					return std::string();
 				}
@@ -119,7 +106,7 @@ namespace asx
 			{
 			private:
 				typedef point_atomic<T>*		PTRUNIT;
-				typedef const char*				PTRFMT;
+				typedef asx::formatter*			PTRFMT;
 				PTRUNIT							m_x;
 				PTRUNIT							m_y;
 				PTRUNIT							m_z;
@@ -127,18 +114,12 @@ namespace asx
 			public:
 				point() noexcept
 				{
-					m_fmt = new const char();
+					
 					m_x = new point_atomic<T>();
 					m_y = new point_atomic<T>();
 					m_z = new point_atomic<T>();
 				}
-				// Унаследовано через iPrintable
-				virtual std::string ToString() override
-				{
-					return std::string();
-				}
-
-
+				
 				// Унаследовано через iPrintable
 				virtual std::string ToString(const char * fmt) override
 				{

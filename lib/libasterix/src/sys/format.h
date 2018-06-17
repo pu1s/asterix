@@ -26,32 +26,21 @@ SOFTWARE.
 
 #include "global.h"
 #include <vector>
+#include <cassert>
 
-#define FRMT_VAL_LIMIT	const unsigned
-#define FRMT_KEY_FLAGS	const char*
-#define FRMT_FLAG_EMPTY	"";
+
+
 namespace asx
 {
+	enum formatter_flag : const unsigned char
+	{
+		FRMT_PARAM_EMPTY	= 0x0001,
+		FRMT_PARAM_SHOWPOS	= 0x0002,
+		FRMT_PARAM_SHOWFIL	= 0x0004,
+		FRMT_PARAM_DEFAULT	= 0x0008,
+	};
 	struct formatter
 	{
-	private:
-		FRMT_VAL_LIMIT DEF_PREC_MIN				= 0;
-		FRMT_VAL_LIMIT DEF_PREC_MAX				= 10;
-		FRMT_VAL_LIMIT DEF_PREC_VAL				= 5;
-		FRMT_KEY_FLAGS KEY_SHOW_POS				= "%s";
-		FRMT_KEY_FLAGS KEY_SHOW_FILL			= "%f";
-		FRMT_KEY_FLAGS KEY_SHOW_PREC			= "%p=";
-		typedef std::vector<const char*>* key_list;
 
-	private:
-		const char* _frmt;
-		key_list _key_list;
-
-	public:
-		
-		formatter() noexcept : _frmt(""), _key_list(new std::vector<const char*>())
-		{
-			
-		}
 	};
 }
