@@ -28,19 +28,32 @@ SOFTWARE.
 #include <vector>
 #include <cassert>
 
+#define CUCHR const unsigned char
 
 
 namespace asx
 {
-	enum formatter_flag : const unsigned char
+	typedef
+	enum formatter_parameters_tag : int
 	{
-		FRMT_PARAM_EMPTY	= 0x0001,
-		FRMT_PARAM_SHOWPOS	= 0x0002,
-		FRMT_PARAM_SHOWFIL	= 0x0004,
-		FRMT_PARAM_DEFAULT	= 0x0008,
-	};
+		FRMT_PARAM_SHOWPOS	= 0x0001,
+		FRMT_PARAM_SHOWFIL	= 0x0002,
+		FRMT_PARAM_DEFAULT	= 0x0004,
+	}FRMT_PARAM;
+
+	typedef
 	struct formatter
 	{
+	private: 
+		unsigned int*	m_format_precision;
+		unsigned int*	m_format_parameters;
+	public:
+		formatter() noexcept : m_format_parameters(new unsigned int()), m_format_precision(new unsigned int()) {}
+		explicit formatter(unsigned int params, const unsigned int& precision) noexcept : formatter()
+		{
+			m_format_parameters = (unsigned int*)&params;
+			m_format_precision = (unsigned int*)&precision;
+		}
 
-	};
+	}FORMATTER, *formatter_ptr;
 }
